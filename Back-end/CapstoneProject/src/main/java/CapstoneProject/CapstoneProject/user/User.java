@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -54,8 +55,8 @@ public class User implements UserDetails {
 
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date data_creazione;
+    @Temporal(TemporalType.DATE)
+    protected LocalDate data_creazione;
 
 
     @Column(name = "ruolo")

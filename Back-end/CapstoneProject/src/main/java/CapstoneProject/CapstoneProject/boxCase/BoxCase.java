@@ -46,4 +46,12 @@ public class BoxCase extends Item {
         this.altezza = altezza;
         this.profondità = profondità;
     }
+
+    public BoxCase(Formato formato, int num_ventole, int larghezza, int altezza, int profondità) {
+        this.formato = formato;
+        this.num_ventole = num_ventole;
+        this.larghezza = larghezza;
+        this.altezza = altezza;
+        this.profondità = profondità;
+    }
 }

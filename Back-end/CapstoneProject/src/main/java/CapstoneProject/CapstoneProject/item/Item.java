@@ -6,8 +6,7 @@ import CapstoneProject.CapstoneProject.order.Ordine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
-import org.apache.catalina.User;
+import CapstoneProject.CapstoneProject.user.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -41,8 +40,8 @@ public abstract class Item {
 
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date data_creazione;
+    @Temporal(TemporalType.DATE)
+    protected LocalDate data_creazione;
 
     @Column(name = "data_di_rilascio", nullable = false)
     protected LocalDate data_di_rilascio;

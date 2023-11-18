@@ -73,6 +73,20 @@ public class SchedaMadre extends Item {
         this.lista_ram = lista_ram;
     }
 
+    public SchedaMadre(Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2, Set<Ram> lista_ram) {
+        this.formato = formato;
+        this.chipset = chipset;
+        this.socket = socket;
+        this.tipo_di_memoria = tipo_di_memoria;
+        this.max_memory_size = max_memory_size;
+        this.has_wifi = has_wifi;
+        this.has_bluetooth = has_bluetooth;
+        this.numero_porte_usb = numero_porte_usb;
+        this.numero_pcie = numero_pcie;
+        this.supporto_m2 = supporto_m2;
+        this.lista_ram = lista_ram;
+    }
+
     public void setFormato(Formato formato) {
         this.formato = formato;
     }

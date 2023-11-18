@@ -31,4 +31,9 @@ public class HardDisk extends Item {
         this.m2 = m2;
         this.capacità = capacità;
     }
+
+    public HardDisk(boolean m2, String capacità) {
+        this.m2 = m2;
+        this.capacità = capacità;
+    }
 }

@@ -3,8 +3,8 @@ package CapstoneProject.CapstoneProject.carta_di_credito;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
+import CapstoneProject.CapstoneProject.user.User;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,8 +28,8 @@ public class CartaDiCredito {
     private String data_di_scadenza;
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date data_creazione;
+    @Temporal(TemporalType.DATE)
+    protected LocalDate data_creazione;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -45,6 +45,15 @@ public class CartaDiCredito {
         this.numero_carta = numero_carta;
         this.cvv = cvv;
         this.data_di_scadenza = data_di_scadenza;
+        this.user = user;
+    }
+
+    public CartaDiCredito(long id, String numero_carta, String cvv, String data_di_scadenza, LocalDate data_creazione, User user) {
+        this.id = id;
+        this.numero_carta = numero_carta;
+        this.cvv = cvv;
+        this.data_di_scadenza = data_di_scadenza;
+        this.data_creazione = data_creazione;
         this.user = user;
     }
 }

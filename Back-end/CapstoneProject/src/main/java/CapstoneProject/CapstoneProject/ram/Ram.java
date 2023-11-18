@@ -43,6 +43,13 @@ public class Ram extends Item {
         this.lista_schedemadri = lista_schedemadri;
     }
 
+    public Ram(String tipo_di_memoria, int velocità, int dimensione, Set<SchedaMadre> lista_schedemadri) {
+        this.tipo_di_memoria = tipo_di_memoria;
+        this.velocità = velocità;
+        this.dimensione = dimensione;
+        this.lista_schedemadri = lista_schedemadri;
+    }
+
     public void setTipo_di_memoria(String tipo_di_memoria) {
         this.tipo_di_memoria = tipo_di_memoria;
     }

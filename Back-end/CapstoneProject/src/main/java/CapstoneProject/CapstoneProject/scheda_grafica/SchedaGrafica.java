@@ -38,4 +38,11 @@ public class SchedaGrafica extends Item {
         this.boost_clock = boost_clock;
         this.dimensione_memoria = dimensione_memoria;
     }
+
+    public SchedaGrafica(int larghezza, int lunghezza, String boost_clock, int dimensione_memoria) {
+        this.larghezza = larghezza;
+        this.lunghezza = lunghezza;
+        this.boost_clock = boost_clock;
+        this.dimensione_memoria = dimensione_memoria;
+    }
 }

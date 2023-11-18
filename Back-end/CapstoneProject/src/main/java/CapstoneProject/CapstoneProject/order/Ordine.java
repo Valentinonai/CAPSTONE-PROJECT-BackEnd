@@ -27,8 +27,8 @@ public class Ordine {
 
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date data_creazione;
+    @Temporal(TemporalType.DATE)
+    protected LocalDate data_creazione;
 
     @Column(name = "data_di_consegna")
     private LocalDate data_di_consegna;

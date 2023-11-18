@@ -54,4 +54,16 @@ public class Cpu extends Item {
         this.grafica_integrata = grafica_integrata;
         this.tipo_memoria_di_sistema = tipo_memoria_di_sistema;
     }
+
+    public Cpu(String socket, int numero_core, int numero_threads, String max_boost_clock, int cache_l2, int cache_l3, int max_temperatura, boolean grafica_integrata, String tipo_memoria_di_sistema) {
+        this.socket = socket;
+        this.numero_core = numero_core;
+        this.numero_threads = numero_threads;
+        this.max_boost_clock = max_boost_clock;
+        this.cache_l2 = cache_l2;
+        this.cache_l3 = cache_l3;
+        this.max_temperatura = max_temperatura;
+        this.grafica_integrata = grafica_integrata;
+        this.tipo_memoria_di_sistema = tipo_memoria_di_sistema;
+    }
 }

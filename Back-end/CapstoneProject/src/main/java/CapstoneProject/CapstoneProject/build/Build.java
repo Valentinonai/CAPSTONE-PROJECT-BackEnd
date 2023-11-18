@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -24,8 +24,8 @@ public class Build {
 
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date data_creazione;
+    @Temporal(TemporalType.DATE)
+    protected LocalDate data_creazione;
 
     @Column(name = "prezzo")
     private double prezzo;
@@ -54,6 +54,14 @@ public class Build {
         this.items = items;
     }
 
+    public Build(long id, LocalDate data_creazione, double prezzo, List<Ordine> ordini, List<Item> items, User user) {
+        this.id = id;
+        this.data_creazione = data_creazione;
+        this.prezzo = prezzo;
+        this.ordini = ordini;
+        this.items = items;
+        this.user = user;
+    }
 
     public double calcolatot(List<Item> items){
         double tot=0;

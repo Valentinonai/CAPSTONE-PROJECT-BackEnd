@@ -4,7 +4,7 @@ import CapstoneProject.CapstoneProject.order.Ordine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
+import CapstoneProject.CapstoneProject.user.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -37,7 +37,7 @@ public class IndirizzoDiSpedizione {
 
     @Column(name = "data_creazione")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     protected LocalDate data_creazione;
 
     @OneToOne
@@ -60,5 +60,17 @@ public class IndirizzoDiSpedizione {
         this.paese = paese;
         this.provincia = provincia;
         this.user = user;
+    }
+
+    public IndirizzoDiSpedizione(long id, String via, int numero, String codice_postale, String paese, String provincia, LocalDate data_creazione, User user, List<Ordine> ordini) {
+        this.id = id;
+        this.via = via;
+        this.numero = numero;
+        this.codice_postale = codice_postale;
+        this.paese = paese;
+        this.provincia = provincia;
+        this.data_creazione = data_creazione;
+        this.user = user;
+        this.ordini = ordini;
     }
 }

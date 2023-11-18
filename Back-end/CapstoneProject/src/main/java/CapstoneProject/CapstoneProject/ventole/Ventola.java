@@ -37,4 +37,11 @@ public class Ventola extends Item {
         this.pwm = pwm;
         this.dimensione = dimensione;
     }
+
+    public Ventola(int rpm_min, int rpm_max, boolean pwm, int dimensione) {
+        this.rpm_min = rpm_min;
+        this.rpm_max = rpm_max;
+        this.pwm = pwm;
+        this.dimensione = dimensione;
+    }
 }

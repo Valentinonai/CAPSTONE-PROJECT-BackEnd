@@ -35,4 +35,10 @@ public class Alimentatore extends Item {
         this.modulare = modulare;
         this.peso=peso;
     }
+
+    public Alimentatore(int potenza_max_erogata, boolean modulare, int peso) {
+        this.potenza_max_erogata = potenza_max_erogata;
+        this.modulare = modulare;
+        this.peso = peso;
+    }
 }

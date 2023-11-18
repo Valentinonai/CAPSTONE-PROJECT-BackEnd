@@ -25,15 +25,15 @@ public class BuildService {
 
     public Build saveBuild(BuildSavePayload body) {
         Build b = new Build(body.items(), body.user());
-        buildRepository.save(b);
-        return b;
+
+        return buildRepository.save(b);
     }
 
     public Build modifyBuild(BuildSavePayload body, long id) {
         Build b = getSingleBuild(id);
         b.setItems(body.items());
-        buildRepository.save(b);
-        return b;
+
+        return buildRepository.save(b);
     }
 
     public void deleteBuild(Build b) {

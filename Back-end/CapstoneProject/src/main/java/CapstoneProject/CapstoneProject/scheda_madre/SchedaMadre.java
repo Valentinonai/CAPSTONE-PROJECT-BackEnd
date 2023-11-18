@@ -2,10 +2,12 @@ package CapstoneProject.CapstoneProject.scheda_madre;
 
 import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.item.Item;
+import CapstoneProject.CapstoneProject.ram.Ram;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Set;
 
 
 @Getter

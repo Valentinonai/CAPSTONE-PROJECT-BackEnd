@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.ram;
 
+import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadre;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -33,7 +35,8 @@ public class Ram extends Item {
 
     public Ram(){}
 
-    public Ram(String tipo_di_memoria, int velocità, int dimensione, Set<SchedaMadre> lista_schedemadri) {
+    public Ram(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, String tipo_di_memoria, int velocità, int dimensione, Set<SchedaMadre> lista_schedemadri) {
+        super(marca, nome, descrizione, prezzo, data_di_rilascio, potenza_di_picco, quantità, categoria);
         this.tipo_di_memoria = tipo_di_memoria;
         this.velocità = velocità;
         this.dimensione = dimensione;

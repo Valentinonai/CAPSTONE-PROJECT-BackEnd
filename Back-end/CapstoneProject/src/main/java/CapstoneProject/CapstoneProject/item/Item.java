@@ -41,4 +41,19 @@ public abstract class Item {
     @Column(name = "categoria",nullable = false)
     @Enumerated(EnumType.STRING)
     protected Categoria categoria;
+
+    //metodi e costruttori
+
+    public Item(){}
+
+    public Item(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria) {
+        this.marca = marca;
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.prezzo = prezzo;
+        this.data_di_rilascio = data_di_rilascio;
+        this.potenza_di_picco = potenza_di_picco;
+        this.quantità = quantità;
+        this.categoria = categoria;
+    }
 }

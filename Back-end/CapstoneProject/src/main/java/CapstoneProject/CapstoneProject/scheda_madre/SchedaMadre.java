@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.scheda_madre;
 
+import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.ram.Ram;
@@ -7,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 
@@ -53,7 +55,9 @@ public class SchedaMadre extends Item {
     //metodi e costruttori
 
     public SchedaMadre(){}
-    public SchedaMadre(Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2, Set<Ram> lista_ram) {
+
+    public SchedaMadre(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2, Set<Ram> lista_ram) {
+        super(marca, nome, descrizione, prezzo, data_di_rilascio, potenza_di_picco, quantità, categoria);
         this.formato = formato;
         this.chipset = chipset;
         this.socket = socket;

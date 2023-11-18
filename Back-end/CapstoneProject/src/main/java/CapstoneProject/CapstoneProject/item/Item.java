@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.item;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
+import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.order.Ordine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -66,6 +67,11 @@ public abstract class Item {
     @JsonIgnore
     private Set<User> users;
 
+    @ManyToMany
+    @JoinTable(name = "item_build",joinColumns = @JoinColumn(name = "item_id"),inverseJoinColumns = @JoinColumn(name ="build_id" ))
+    @JsonIgnore
+    private List<Build> builds;
+
     //metodi e costruttori
 
     public Item(){}
@@ -123,5 +129,9 @@ public abstract class Item {
 
     public void setUsers(User user) {
         this.users.add(user);
+    }
+
+    public void setBuilds(Build build) {
+        this.builds.add(build);
     }
 }

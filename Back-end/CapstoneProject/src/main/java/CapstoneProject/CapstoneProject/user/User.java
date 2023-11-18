@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.Enum.Ruolo;
+import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.item.Item;

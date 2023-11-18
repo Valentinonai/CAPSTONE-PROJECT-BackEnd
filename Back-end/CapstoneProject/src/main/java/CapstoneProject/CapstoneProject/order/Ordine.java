@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.order;
 
+import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.user.User;
@@ -42,7 +43,7 @@ public class Ordine {
     @JoinColumn(name = "user")
     private User user;
 
-    @ManyToMany;
+    @ManyToMany
     @JoinTable(name = "build_ordine",joinColumns = @JoinColumn(name = "ordine_id"),inverseJoinColumns = @JoinColumn(name = "build_id"))
     private List<Build> builds;
 

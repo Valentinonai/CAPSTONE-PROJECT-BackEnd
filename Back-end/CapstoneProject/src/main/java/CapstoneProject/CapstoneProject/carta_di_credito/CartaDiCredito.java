@@ -16,7 +16,7 @@ public class CartaDiCredito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "numero_carta",nullable = false)
     private String numero_carta;

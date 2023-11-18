@@ -5,8 +5,10 @@ import CapstoneProject.CapstoneProject.order.Ordine;
 import CapstoneProject.CapstoneProject.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -14,8 +16,10 @@ import java.util.List;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "bulds")
+@Table(name = "builds")
 public class Build {
 
     @Id
@@ -30,35 +34,33 @@ public class Build {
     @Column(name = "prezzo")
     private double prezzo;
 
-    @ManyToMany
-    @JoinTable(name = "build_ordine",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "ordine_id"))
-    @JsonIgnore
-    private List<Ordine> ordini;
+   @ManyToMany
+   @JoinTable(name = "build_ordine",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "ordine_id"))
+   @JsonIgnore
+   private List<Ordine> ordini;
 
     @ManyToMany
     @JoinTable(name = "item_build",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
 
     //metodi e costruttori
 
-    public Build(){}
+
 
     public Build(List<Item> items) {
         this.prezzo = calcolatot(items);
         this.items = items;
     }
 
-    public Build(long id, LocalDate data_creazione, double prezzo, List<Ordine> ordini, List<Item> items, User user) {
-        this.id = id;
+    public Build( LocalDate data_creazione, double prezzo,  List<Item> items, User user) {
         this.data_creazione = data_creazione;
-        this.prezzo = prezzo;
-        this.ordini = ordini;
+        this.prezzo = calcolatot(items);
         this.items = items;
         this.user = user;
     }

@@ -80,7 +80,7 @@ public class User implements UserDetails {
 
     //Ordini
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user_id")
     @JsonIgnore
     private List<Ordine> ordini;
 

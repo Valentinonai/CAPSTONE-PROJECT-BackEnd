@@ -40,8 +40,8 @@ public class Ordine {
     private IndirizzoDiSpedizione indirizzo_di_spedizione;
 
     @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
     @ManyToMany
     @JoinTable(name = "build_ordine",joinColumns = @JoinColumn(name = "ordine_id"),inverseJoinColumns = @JoinColumn(name = "build_id"))
@@ -55,11 +55,11 @@ public class Ordine {
 
     public Ordine (){}
 
-    public Ordine(LocalDate data_di_consegna, IndirizzoDiSpedizione indirizzo_di_spedizione, User user, List<Build> builds, List<Item> items) {
-        this.prezzo = calcolaTot(builds,items);
+    public Ordine(LocalDate data_di_consegna, IndirizzoDiSpedizione indirizzo_di_spedizione, User user,List<Build> builds,  List<Item> items) {
+        this.prezzo =calcolaTot(builds,items);
         this.data_di_consegna = data_di_consegna;
         this.indirizzo_di_spedizione = indirizzo_di_spedizione;
-        this.user = user;
+        this.user_id = user;
         this.builds = builds;
         this.items = items;
     }

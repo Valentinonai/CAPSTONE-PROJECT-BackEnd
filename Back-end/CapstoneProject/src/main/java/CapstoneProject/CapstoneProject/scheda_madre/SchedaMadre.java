@@ -44,7 +44,7 @@ public class SchedaMadre extends Item {
     private int numero_porte_usb;
     @Column(name = "numero_pcie")
     private int numero_pcie;
-    @Column(name = "supporto_m2")
+    @Column(name = "supporto_nvme_m2")
     private boolean supporto_m2;
 
 

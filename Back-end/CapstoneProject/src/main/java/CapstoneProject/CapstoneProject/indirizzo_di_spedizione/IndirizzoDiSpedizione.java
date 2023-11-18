@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.indirizzo_di_spedizione;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.catalina.User;
@@ -39,6 +40,7 @@ public class IndirizzoDiSpedizione {
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
 

@@ -22,25 +22,23 @@ import java.util.List;
 @Table(name = "builds")
 public class Build {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Column(name = "data_creazione")
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     protected LocalDate data_creazione;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "prezzo")
     private double prezzo;
 
-   @ManyToMany
-   @JoinTable(name = "build_ordine",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "ordine_id"))
-   @JsonIgnore
-   private List<Ordine> ordini;
+    @ManyToMany
+    @JoinTable(name = "build_ordine", joinColumns = @JoinColumn(name = "build_id"), inverseJoinColumns = @JoinColumn(name = "ordine_id"))
+    @JsonIgnore
+    private List<Ordine> ordini;
 
     @ManyToMany
-    @JoinTable(name = "item_build",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "item_id"))
+    @JoinTable(name = "item_build", joinColumns = @JoinColumn(name = "build_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
     @ManyToOne
@@ -52,23 +50,32 @@ public class Build {
     //metodi e costruttori
 
 
-
-    public Build(List<Item> items) {
+    public Build(List<Item> items, User user) {
         this.prezzo = calcolatot(items);
         this.items = items;
+        this.user = user;
     }
 
-    public Build( LocalDate data_creazione, double prezzo,  List<Item> items, User user) {
+    public Build(LocalDate data_creazione, double prezzo, List<Item> items, User user) {
         this.data_creazione = data_creazione;
         this.prezzo = calcolatot(items);
         this.items = items;
         this.user = user;
     }
 
-    public double calcolatot(List<Item> items){
-        double tot=0;
-        for(int i=0;i<items.size();i++)
-            tot+=items.get(i).getPrezzo();
+    public void setOrdini(List<Ordine> ordini) {
+        this.ordini = ordini;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items.removeAll(this.items);
+        this.items = items;
+    }
+
+    public double calcolatot(List<Item> items) {
+        double tot = 0;
+        for (int i = 0; i < items.size(); i++)
+            tot += items.get(i).getPrezzo();
         return tot;
     }
 }

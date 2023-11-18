@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.indirizzo_di_spedizione;
 
+import CapstoneProject.CapstoneProject.order.Ordine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,6 +8,7 @@ import org.apache.catalina.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Setter
 @Getter
@@ -43,6 +45,9 @@ public class IndirizzoDiSpedizione {
     @JsonIgnore
     private User user;
 
+    @OneToMany(mappedBy = "indirizzo_di_spedizione")
+    @JsonIgnore
+    private List<Ordine> ordini;
 
     //metodi e costruttori
 

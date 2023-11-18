@@ -1,8 +1,11 @@
-package CapstoneProject.CapstoneProject;
+package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.Enum.Ruolo;
 import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
+import CapstoneProject.CapstoneProject.item.Item;
+import CapstoneProject.CapstoneProject.order.Ordine;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -27,7 +31,7 @@ public class User implements UserDetails {
     //Dati obbligatori
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "nome",nullable = false)
     private String nome;
@@ -75,8 +79,15 @@ public class User implements UserDetails {
     //Ordini
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Ordine> ordini;
 
+
+    //items
+
+    @ManyToMany
+    @JoinTable(name = "item_user",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name ="item_id" ))
+    private Set<Item> items;
 
     //costruttori
 
@@ -126,7 +137,7 @@ public class User implements UserDetails {
         this.cartaDiCredito = cartaDiCredito;
     }
 
-    public void setIndirizzoSpedizione(IndirizzoSpedizione indirizzoSpedizione) {
+    public void setIndirizzoSpedizione(IndirizzoDiSpedizione indirizzoSpedizione) {
         this.indirizzoSpedizione = indirizzoSpedizione;
     }
 
@@ -139,7 +150,19 @@ public class User implements UserDetails {
     }
 
 
-    //Metodi dell'interfaccia
+    public void setBuilds(Build build) {
+        this.builds.add(build);
+    }
+
+    public void setOrdini(Ordine ordine) {
+        this.ordini.add(ordine);
+    }
+
+    public void setItems(Item item) {
+        this.items.add(item);
+    }
+
+//Metodi dell'interfaccia
 
 
     @Override

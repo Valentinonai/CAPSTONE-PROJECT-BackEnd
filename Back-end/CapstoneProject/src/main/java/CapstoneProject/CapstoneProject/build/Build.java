@@ -39,7 +39,7 @@ public class Build {
     @JoinTable(name = "item_build",joinColumns = @JoinColumn(name ="build_id" ),inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "user")
     @JsonIgnore
     private User user;

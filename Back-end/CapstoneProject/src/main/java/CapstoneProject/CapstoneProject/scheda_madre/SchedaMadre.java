@@ -4,6 +4,7 @@ import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.ram.Ram;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,6 +51,7 @@ public class SchedaMadre extends Item {
 
     @ManyToMany
     @JoinTable(name = "schedamadre_ram",joinColumns = @JoinColumn(name = "scheda_madre"),inverseJoinColumns = @JoinColumn(name = "ram"))
+            @JsonIgnore
     Set<Ram> lista_ram;
 
     //metodi e costruttori

@@ -151,14 +151,6 @@ public class User implements UserDetails {
     }
 
 
-    public void setBuilds(Build build) {
-        this.builds.add(build);
-    }
-
-    public void setOrdini(Ordine ordine) {
-        this.ordini.add(ordine);
-    }
-
     public void setItems(Item item) {
         this.items.add(item);
     }

@@ -55,9 +55,9 @@ public class Ordine {
 
     public Ordine (){}
 
-    public Ordine(LocalDate data_di_consegna, IndirizzoDiSpedizione indirizzo_di_spedizione, User user,List<Build> builds,  List<Item> items) {
+    public Ordine(IndirizzoDiSpedizione indirizzo_di_spedizione, User user,List<Build> builds,  List<Item> items) {
         this.prezzo =calcolaTot(builds,items);
-        this.data_di_consegna = data_di_consegna;
+        this.data_di_consegna = this.data_creazione.plusDays(5);
         this.indirizzo_di_spedizione = indirizzo_di_spedizione;
         this.user_id = user;
         this.builds = builds;

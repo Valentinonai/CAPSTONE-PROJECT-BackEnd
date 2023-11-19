@@ -40,5 +40,5 @@ public class OrdineService {
         return o;
     }
 
-    
+
 }

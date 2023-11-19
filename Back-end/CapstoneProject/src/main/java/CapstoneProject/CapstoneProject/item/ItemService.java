@@ -17,7 +17,7 @@ import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGrafica;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadre;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
-import CapstoneProject.CapstoneProject.service.CloudinaryService;
+import CapstoneProject.CapstoneProject.cloudinary.CloudinaryService;
 import CapstoneProject.CapstoneProject.ventole.Ventola;
 import CapstoneProject.CapstoneProject.ventole.VentolePayLoad;
 import com.cloudinary.Cloudinary;
@@ -29,6 +29,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class ItemService {
@@ -127,7 +129,7 @@ public class ItemService {
     }
    //----------------UPLOAD IMMAGINE----------------------
 
-    public Item uploadImg(MultipartFile file,long id){
+    public Item uploadImg(MultipartFile file,long id) throws IOException {
         Item i=getSingleItem(id);
         if(!i.getImmagineUrl().equals("https://res.cloudinary.com/dzr77mvcs/image/upload/v1699804334/uzqt1xnviwyjlcxqnqka.webp"))
             cloudinaryService.deleteImageByUrl(i.getImmagineUrl());

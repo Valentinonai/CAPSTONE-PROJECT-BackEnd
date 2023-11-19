@@ -46,7 +46,7 @@ public class SchedaMadre extends Item {
     @Column(name = "numero_pcie")
     private int numero_pcie;
     @Column(name = "supporto_nvme_m2")
-    private boolean supporto_m2;
+    private boolean supporto_m2=false;
 
 
     @ManyToMany
@@ -58,7 +58,7 @@ public class SchedaMadre extends Item {
 
     public SchedaMadre(){}
 
-    public SchedaMadre(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2, Set<Ram> lista_ram) {
+    public SchedaMadre(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2) {
         super(marca, nome, descrizione, prezzo, data_di_rilascio, potenza_di_picco, quantità, categoria);
         this.formato = formato;
         this.chipset = chipset;
@@ -70,7 +70,6 @@ public class SchedaMadre extends Item {
         this.numero_porte_usb = numero_porte_usb;
         this.numero_pcie = numero_pcie;
         this.supporto_m2 = supporto_m2;
-        this.lista_ram = lista_ram;
     }
 
     public SchedaMadre(Formato formato, String chipset, String socket, String tipo_di_memoria, int max_memory_size, boolean has_wifi, boolean has_bluetooth, int numero_porte_usb, int numero_pcie, boolean supporto_m2, Set<Ram> lista_ram) {

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Table(name = "hard_disk")
 public class HardDisk extends Item {
     @Column(name = "nvme_m2",nullable = false)
-    private boolean m2;
+    private boolean m2=false;
     @Column(name = "capacità",nullable = false)
     private String capacità;
 

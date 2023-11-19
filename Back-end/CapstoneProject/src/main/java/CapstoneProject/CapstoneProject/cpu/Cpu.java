@@ -32,7 +32,7 @@ public class Cpu extends Item {
     private int max_temperatura;
 
     @Column(name = "grafica_integrata",nullable = false)
-    private boolean grafica_integrata;
+    private boolean grafica_integrata=false;
     @Column(name = "tipo_memoria_di_sistema",nullable = false)
     private String tipo_memoria_di_sistema;
 

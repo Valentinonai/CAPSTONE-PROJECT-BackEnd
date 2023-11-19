@@ -27,7 +27,7 @@ public class Ram extends Item {
 
     @ManyToMany
     @JoinTable(name = "schedamadre_ram",joinColumns = @JoinColumn(name = "ram") ,inverseJoinColumns =@JoinColumn(name = "scheda_madre"))
-    Set<SchedaMadre> lista_schedemadri;
+    private Set<SchedaMadre> lista_schedemadri;
 
 
 

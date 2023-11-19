@@ -21,7 +21,7 @@ public class Alimentatore extends Item {
     @Column(name = "potenza_massima_erogata",nullable = false)
     private int potenza_max_erogata;
     @Column(name = "modulare")
-    private boolean modulare;
+    private boolean modulare=false;
     @Column(name = "peso_g")
     private int peso;
 

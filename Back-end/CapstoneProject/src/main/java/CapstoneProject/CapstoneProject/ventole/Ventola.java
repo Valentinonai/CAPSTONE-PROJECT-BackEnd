@@ -38,13 +38,14 @@ public class Ventola extends Item {
         this.rpm_max = rpm_max;
         this.pwm = pwm;
         this.dimensione = dimensione;
-        this.pezzi_per_pacco=getPezzi_per_pacco();
+        this.pezzi_per_pacco=pezzi_per_pacco;
     }
 
-    public Ventola(int rpm_min, int rpm_max, boolean pwm, int dimensione) {
+    public Ventola(int rpm_min, int rpm_max, boolean pwm, int dimensione,int pezzi_per_pacco) {
         this.rpm_min = rpm_min;
         this.rpm_max = rpm_max;
         this.pwm = pwm;
         this.dimensione = dimensione;
+        this.pezzi_per_pacco=pezzi_per_pacco;
     }
 }

@@ -60,7 +60,7 @@ public class User implements UserDetails {
 
 
     @Column(name = "ruolo")
-    private Ruolo ruolo=Ruolo.USER;
+    private Ruolo ruolo;
 
 
     //Dati di pagamento
@@ -101,10 +101,13 @@ public class User implements UserDetails {
         this.cognome = cognome;
         this.email = email;
         this.password = password;
+        this.ruolo=Ruolo.USER;
     }
 
 
-
+public boolean getHasDatiOrdine(){
+        return this.has_dati_ordine;
+}
 
     //Setters
 

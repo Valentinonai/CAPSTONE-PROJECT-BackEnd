@@ -17,20 +17,29 @@ import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGrafica;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadre;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
+import CapstoneProject.CapstoneProject.service.CloudinaryService;
 import CapstoneProject.CapstoneProject.ventole.Ventola;
 import CapstoneProject.CapstoneProject.ventole.VentolePayLoad;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
+    @Autowired
+    private Cloudinary cloudinary;
 
     //-----------------------GET------------------------------
 
@@ -93,7 +102,7 @@ public class ItemService {
 
 
 
-    public Item modificaQuandità(long id){
+    public Item scalaQuandita(long id){
         Item i=getSingleItem(id);
         if(i.getQuantità()>0){
             i.setQuantità(i.getQuantità()-1);
@@ -103,7 +112,28 @@ public class ItemService {
 
     }
 
+    public Item modificaQuantita(ItemPayLoadQuantita body,long id){
+        Item i=getSingleItem(id);
+        i.setQuantità(body.quantita());
+        return itemRepository.save(i);
+    }
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!! MODIFICA IMMAGINE DA FARE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public Item modificaPrezzo(ItemPayLoadPrezzo body,long id){
+        Item i=getSingleItem(id);
+        if(!i.getImmagineUrl().equals("https://res.cloudinary.com/dzr77mvcs/image/upload/v1699804334/uzqt1xnviwyjlcxqnqka.webp"))
+            cloudinaryService.deleteImageByUrl(i.getImmagineUrl());
+        i.setPrezzo(body.prezzo());
+        return itemRepository.save(i);
+    }
+   //----------------UPLOAD IMMAGINE----------------------
 
+    public Item uploadImg(MultipartFile file,long id){
+        Item i=getSingleItem(id);
+        if(!i.getImmagineUrl().equals("https://res.cloudinary.com/dzr77mvcs/image/upload/v1699804334/uzqt1xnviwyjlcxqnqka.webp"))
+            cloudinaryService.deleteImageByUrl(i.getImmagineUrl());
+            String url=(String)  cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+            i.setImmagineUrl(url);
+            return itemRepository.save(i);
+
+    }
 }

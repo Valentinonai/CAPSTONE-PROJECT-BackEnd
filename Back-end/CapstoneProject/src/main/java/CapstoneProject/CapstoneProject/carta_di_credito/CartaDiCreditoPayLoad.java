@@ -10,8 +10,6 @@ public record CartaDiCreditoPayLoad(
         @NotEmpty(message = "Il cvv non può essere vuoto")
         String cvv,
         @NotEmpty(message = "La data di scadenza non può essere vuota")
-        String data_di_scadenza,
-        @NotNull(message = "La carta deve essere associata ad uno user")
-        User user
+        String data_di_scadenza
 ) {
 }

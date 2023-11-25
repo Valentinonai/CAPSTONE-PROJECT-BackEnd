@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.order;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.item.ItemPayLoadQuantita;
@@ -38,8 +39,8 @@ public class OrdineService {
         return ordineRepository.findById(id).orElseThrow(()->new NotFoundException("Elemento non trovato"));
     }
 
-    public Ordine saveOrdine(OrdinePayLaod body){
-        User u=userService.getSingleUser(body.user_id());
+    public Ordine saveOrdine(OrdinePayLaod body,long user_id){
+        User u=userService.getSingleUser(user_id);
         Ordine o=new Ordine(u.getIndirizzoSpedizione(),u,body.builds(),body.items());
         boolean check=false;
         List<Integer> elementiDaRimuovere=new ArrayList<>();
@@ -81,5 +82,9 @@ public class OrdineService {
         return o;
     }
 
-
+public void eliminaOrdine(long id){
+Ordine o=getSingleOrdine(id);
+o.setStato(Stato.INATTIVO);
+ordineRepository.save(o);
+}
 }

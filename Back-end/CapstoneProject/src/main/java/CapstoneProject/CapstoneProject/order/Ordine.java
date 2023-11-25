@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.order;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.item.Item;
@@ -33,6 +34,10 @@ public class Ordine {
     @Column(name = "data_di_consegna")
     private LocalDate data_di_consegna;
 
+    @Column(name = "stato")
+    @Enumerated(EnumType.STRING)
+    private Stato stato=Stato.ATTIVO;
+
 
 
     @ManyToOne
@@ -50,6 +55,7 @@ public class Ordine {
     @ManyToMany
     @JoinTable(name = "item_ordine",joinColumns = @JoinColumn(name = "ordine_id"),inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
+
 
     //metodi e costruttori
 

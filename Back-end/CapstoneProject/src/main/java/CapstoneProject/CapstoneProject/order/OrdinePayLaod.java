@@ -11,9 +11,6 @@ import java.util.List;
 
 public record OrdinePayLaod(
 
-        @NotNull(message = "Il campo user non può essere vuoto")
-        long  user_id,
-
         List<Build> builds,
 
         List<Item> items

@@ -32,13 +32,13 @@ public class ItemController {
 
     //------------------------EndPoint per Items-------------------------------
     @GetMapping()
-    @PreAuthorize("hasAnyAthority('ADMIN',USER)")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Item> getAllItems(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
         return itemService.getAllItems(page,size>20?10:size,order);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAthority('ADMIN',USER)")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Item getSingleItem(@PathVariable long id){
         return itemService.getSingleItem(id);
     }

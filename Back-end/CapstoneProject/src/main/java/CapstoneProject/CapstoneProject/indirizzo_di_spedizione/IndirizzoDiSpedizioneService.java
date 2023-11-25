@@ -24,19 +24,19 @@ public class IndirizzoDiSpedizioneService {
         return indirizzoDiSpedizioneRepository.findById(id).orElseThrow(() -> new NotFoundException("Elemento non trovato"));
     }
 
-    public IndirizzoDiSpedizione saveIndirizzo(IndirizzoDiSpedizionePayLoad body) {
-        IndirizzoDiSpedizione i = new IndirizzoDiSpedizione(body.via(), body.numero(), body.codice_postale(), body.paese(), body.numero_interno(), body.provincia(), body.user());
+    public IndirizzoDiSpedizione saveIndirizzo(IndirizzoDiSpedizionePayLoad body,User u) {
+        IndirizzoDiSpedizione i = new IndirizzoDiSpedizione(body.via(), body.numero(), body.codice_postale(), body.paese(), body.numero_interno(), body.provincia(), u);
         return indirizzoDiSpedizioneRepository.save(i);
     }
 
-    public IndirizzoDiSpedizione modifyIndirizzo(IndirizzoDiSpedizione body, User user) {
+    public IndirizzoDiSpedizione modifyIndirizzo(ModificaIndirizzoPayLoad body, User user) {
         IndirizzoDiSpedizione i = getSingleIndirizzo(user.getIndirizzoSpedizione().getId());
-        i.setVia(body.getVia());
-        i.setNumero(body.getNumero());
-        i.setPaese(body.getPaese());
-        i.setCodice_postale(body.getCodice_postale());
-        i.setNumero_interno(body.getNumero_interno());
-        i.setProvincia(body.getProvincia());
+        i.setVia(body.via()==null?i.getVia(): body.via());
+        i.setNumero(body.numero()==null?i.getNumero():Integer.parseInt(body.numero()));
+        i.setPaese(body.paese()==null?i.getPaese(): body.paese());
+        i.setCodice_postale(body.codice_postale()==null?i.getCodice_postale(): body.codice_postale());
+        i.setNumero_interno(body.numero_interno()==null?i.getNumero_interno():Integer.parseInt(body.numero_interno()));
+        i.setProvincia(body.provincia()==null?i.getProvincia(): body.provincia());
         return indirizzoDiSpedizioneRepository.save(i);
     }
 

@@ -17,10 +17,7 @@ public record IndirizzoDiSpedizionePayLoad(
         @NotEmpty(message = "La provincia non può essere vuota")
         String provincia,
         @Min(value = 1, message = "Il numero interno deve essere maggiore di 0")
-        int numero_interno,
-
-        @NotNull(message = "L'indirizzo deve essere associato ad un utente")
-        User user
+        int numero_interno
 
 
 ) {

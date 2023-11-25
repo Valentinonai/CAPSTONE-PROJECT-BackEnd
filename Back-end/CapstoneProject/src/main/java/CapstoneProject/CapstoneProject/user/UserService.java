@@ -1,6 +1,8 @@
 package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
+import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizionePayLoad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -50,5 +52,11 @@ public class UserService {
 
     public User findByEmail(String email){
         return userRepository.findByEmail(email).orElseThrow(()->new NotFoundException("User con l'email selezionata non è stato trovato"));
+    }
+
+    public User saveIndirizzoUser(IndirizzoDiSpedizione indirizzoDiSpedizione, User u){
+        User user=getSingleUser(u.getId());
+        user.setIndirizzoSpedizione(indirizzoDiSpedizione);
+        return userRepository.save(user);
     }
 }

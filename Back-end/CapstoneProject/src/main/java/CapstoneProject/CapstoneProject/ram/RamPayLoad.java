@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public record RamPayLoad(
@@ -42,6 +43,6 @@ public record RamPayLoad(
       int dimensione,
 
         @NotEmpty(message = "Il campo lista di compatibilità  non può essere vuoto")
-        Set<SchedaMadre> lista_schedemadri
+        List<Long> lista_schedemadri_id
 ) {
 }

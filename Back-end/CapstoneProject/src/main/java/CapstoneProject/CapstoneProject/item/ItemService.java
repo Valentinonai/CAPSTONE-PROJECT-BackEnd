@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.item;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.alimentatore.Alimentatore;
 import CapstoneProject.CapstoneProject.alimentatore.AlimentatorePayLoad;
 import CapstoneProject.CapstoneProject.boxCase.BoxCase;
@@ -31,6 +32,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class ItemService {
@@ -65,7 +70,12 @@ public class ItemService {
     }
 
     public Item saveRam(RamPayLoad body){
-        Ram r=new Ram(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(),body.quantita(), Categoria.RAM, body.tipo_di_memoria(), body.velocità(), body.dimensione(), body.lista_schedemadri());
+        Set<SchedaMadre> schedaMadreList=new HashSet<>();
+        for(int i=0;i<body.lista_schedemadri_id().size();i++) {
+            SchedaMadre schedaMadre=(SchedaMadre) getSingleItem(body.lista_schedemadri_id().get(i));
+            schedaMadreList.add(schedaMadre);
+        }
+            Ram r=new Ram(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(),body.quantita(), Categoria.RAM, body.tipo_di_memoria(), body.velocità(), body.dimensione(), schedaMadreList);
         return itemRepository.save(r);
     }
 
@@ -97,7 +107,9 @@ public class ItemService {
 
     public void deleteItem(long id){
         Item i=getSingleItem(id);
-        itemRepository.delete(i);
+        i.setStato(Stato.INATTIVO);
+        itemRepository.save(i);
+//        itemRepository.delete(i);
     }
 
     //--------------------MODIFICA----------------------
@@ -122,8 +134,6 @@ public class ItemService {
 
     public Item modificaPrezzo(ItemPayLoadPrezzo body,long id){
         Item i=getSingleItem(id);
-        if(!i.getImmagineUrl().equals("https://res.cloudinary.com/dzr77mvcs/image/upload/v1699804334/uzqt1xnviwyjlcxqnqka.webp"))
-            cloudinaryService.deleteImageByUrl(i.getImmagineUrl());
         i.setPrezzo(body.prezzo());
         return itemRepository.save(i);
     }

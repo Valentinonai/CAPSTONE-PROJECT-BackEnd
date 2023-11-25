@@ -25,20 +25,20 @@ public class OrderController {
 
     @GetMapping()
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Page<Ordine> getAllBuilds(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
+    public Page<Ordine> getAllOrdini(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
         return ordineService.getAllOrdine(page,size>20?10:size,order);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Ordine getSingleBuild(@PathVariable long id){
+    public Ordine getSingleOrdine(@PathVariable long id){
         return ordineService.getSingleOrdine(id);
     }
 
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public Ordine creaBuild(@RequestBody @Validated OrdinePayLaod body, BindingResult validation, @AuthenticationPrincipal User u){
+    public Ordine creaOrdine(@RequestBody @Validated OrdinePayLaod body, BindingResult validation, @AuthenticationPrincipal User u){
         User user=userService.getSingleUser(u.getId());
         if(validation.hasErrors())
         {
@@ -50,7 +50,7 @@ public class OrderController {
     @DeleteMapping("/elimina_ordine/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public void canccellaBuild(@PathVariable long id){
+    public void canccellaOrdine(@PathVariable long id){
         ordineService.eliminaOrdine(id);
     }
 

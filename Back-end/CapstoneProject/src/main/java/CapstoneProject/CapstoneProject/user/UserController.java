@@ -1,11 +1,6 @@
 package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.exception.BadRequest;
-import CapstoneProject.CapstoneProject.exception.ListErrorsPayload;
-import CapstoneProject.CapstoneProject.exception.Unauthorized;
-import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
-import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizionePayLoad;
-import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

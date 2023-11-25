@@ -14,6 +14,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/users")
@@ -47,6 +50,12 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminaUtente(@PathVariable long id){
         userService.deleteUser(id);
+    }
+
+
+    @PutMapping("/carica_immagine/me")
+    public User caricaImmagine(@AuthenticationPrincipal User u, @RequestParam("user_img") MultipartFile file) throws IOException {
+       return userService.uploadImg(file,u.getId());
     }
 
 

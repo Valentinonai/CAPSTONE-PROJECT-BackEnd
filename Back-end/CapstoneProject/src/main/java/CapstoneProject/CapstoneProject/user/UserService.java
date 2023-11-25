@@ -1,8 +1,12 @@
 package CapstoneProject.CapstoneProject.user;
 
+import CapstoneProject.CapstoneProject.cloudinary.CloudinaryService;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizionePayLoad;
+import CapstoneProject.CapstoneProject.item.Item;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class UserService {
@@ -18,6 +25,10 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CloudinaryService cloudinaryService;
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Page<User> getAllUsers(int page,int size,String order){
         Pageable p= PageRequest.of(page,size, Sort.by(order));
@@ -58,5 +69,15 @@ public class UserService {
         User user=getSingleUser(u.getId());
         user.setIndirizzoSpedizione(indirizzoDiSpedizione);
         return userRepository.save(user);
+    }
+
+    public User uploadImg(MultipartFile file, long id) throws IOException {
+        User u=getSingleUser(id);
+        if(!u.getImmagineUrl().equals("https://res.cloudinary.com/dzr77mvcs/image/upload/v1699804243/bqnqdcricxpzxojhihxz.webp"))
+            cloudinaryService.deleteImageByUrl(u.getImmagineUrl());
+        String url=(String)  cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        u.setImmagineUrl(url);
+        return userRepository.save(u);
+
     }
 }

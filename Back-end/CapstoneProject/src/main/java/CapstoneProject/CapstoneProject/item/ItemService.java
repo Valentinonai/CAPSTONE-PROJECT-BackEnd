@@ -74,8 +74,12 @@ public class ItemService {
 
     //----------------------SAVE-----------------------
     public Item saveSchedaMadre(SchedaMadrePayLoad body){
-        SchedaMadre sm=new SchedaMadre(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(),body.quantita(), Categoria.SCHEDA_MADRE,body.formato(), body.chipset(), body.socket(), body.tipo_di_memoria(), body.max_memory_size(), body.has_wifi(), body.has_bluetooth(), body.numero_porte_usb(), body.numero_pcie(), body.supporto_m2());
-        return itemRepository.save(sm);
+        if(body.formato().equalsIgnoreCase("ATX") ||
+        body.formato().equalsIgnoreCase("MICRO_ATX") || body.formato().equalsIgnoreCase("MINI_ITX") ){
+            SchedaMadre sm=new SchedaMadre(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(),body.quantita(), Categoria.SCHEDA_MADRE,Formato.valueOf(body.formato().toUpperCase()), body.chipset(), body.socket(), body.tipo_di_memoria(), body.max_memory_size(), body.has_wifi(), body.has_bluetooth(), body.numero_porte_usb(), body.numero_pcie(), body.supporto_m2());
+            return itemRepository.save(sm);
+        }
+     else throw new BadRequest("Formato non disponibile");
     }
 
     public Item saveCpu(CpuPayLoad body){
@@ -94,8 +98,12 @@ public class ItemService {
     }
 
     public Item saveBoxCase(BoxCasePayLoad body){
-        BoxCase b=new BoxCase(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(),body.quantita(), Categoria.CASE,body.formato(), body.num_ventole(), body.larghezza(), body.altezza(), body.profondità());
-        return itemRepository.save(b);
+        if(body.formato().equalsIgnoreCase("ATX") ||
+                body.formato().equalsIgnoreCase("MICRO_ATX") || body.formato().equalsIgnoreCase("MINI_ITX") ) {
+            BoxCase b = new BoxCase(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(), body.quantita(), Categoria.CASE,Formato.valueOf(body.formato().toUpperCase()) , body.num_ventole(), body.larghezza(), body.altezza(), body.profondità());
+            return itemRepository.save(b);
+        }
+        else throw new BadRequest("Formato non disponibile");
     }
 
     public Item saveAlimentatore(AlimentatorePayLoad body){
@@ -173,7 +181,8 @@ public class ItemService {
 
     public Page<Ram> getRamBySchedaMadre(int page,int size,String order,long schedaMadre_id){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
-        return ramRepository.findBySchedaId(p,schedaMadre_id);
+//    return ramRepository.findBySchedaId(p,schedaMadre_id);
+    return ramRepository.findBySchedaMadreId(p,schedaMadre_id);
     }
     public Page<BoxCase> getBoxCaseByFormato(int page,int size,String order,String tipo){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
@@ -185,6 +194,7 @@ public class ItemService {
     public Page<Alimentatore> getAlimentatoreByPotenza(int page,int size,String order,int power){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
         return alimentatoreRepository.findByPotenza_max_erogataGreaterThan(p,power);
+
     }
     public Page<Item> getByCategoria(int page,int size,String order,String cat){
         if(cat.equalsIgnoreCase("SCHEDA_MADRE")||

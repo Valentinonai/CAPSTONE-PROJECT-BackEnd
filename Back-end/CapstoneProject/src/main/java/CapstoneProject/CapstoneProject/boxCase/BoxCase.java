@@ -3,9 +3,7 @@ package CapstoneProject.CapstoneProject.boxCase;
 import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.item.Item;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +19,7 @@ public class BoxCase extends Item {
 
     //per verificare compatibilità con scheda madre
     @Column(name = "formato",nullable = false)
+    @Enumerated(EnumType.STRING)
     private Formato formato;
 
     //per sapere il numero massimo di ventole che si possono inserire

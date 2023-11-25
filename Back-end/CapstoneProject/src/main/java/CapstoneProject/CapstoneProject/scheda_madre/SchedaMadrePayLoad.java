@@ -20,7 +20,7 @@ public record SchedaMadrePayLoad(
         @NotNull(message = "Il campo prezzo non può essere vuoto")
                 @Min(0)
         double prezzo,
-        @NotEmpty(message = "Il campo data di rilascio non può essere vuoto")
+//        @NotEmpty(message = "Il campo data di rilascio non può essere vuoto")
     LocalDate data_di_rilascio,
 
         @NotNull(message = "Il campo potenza di picco non può essere vuoto")
@@ -31,7 +31,7 @@ public record SchedaMadrePayLoad(
 
 //---------Specifiche
 @NotEmpty(message="Il campo formato non può essere vuoto")
-       Formato formato,
+       String formato,
 
                 //Compatibilità cpu
         @NotEmpty(message="Il campo chipset non può essere vuoto")

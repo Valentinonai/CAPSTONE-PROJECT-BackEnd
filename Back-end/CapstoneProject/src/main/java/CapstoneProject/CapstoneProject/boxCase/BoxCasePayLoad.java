@@ -18,7 +18,6 @@ public record BoxCasePayLoad(
         @NotNull(message = "Il campo prezzo non può essere vuoto")
         @Min(0)
         double prezzo,
-        @NotEmpty(message = "Il campo data di rilascio non può essere vuoto")
         LocalDate data_di_rilascio,
 
         @NotNull(message = "Il campo potenza di picco non può essere vuoto")
@@ -29,7 +28,7 @@ public record BoxCasePayLoad(
 
 //---------Specifiche
         @NotEmpty(message = "Il campo formato non può essere vuoto")
-        Formato formato,
+        String formato,
                 @NotNull(message = "Il campo numero di ventole non può essere vuoto")
         @Min(0)
    int num_ventole,

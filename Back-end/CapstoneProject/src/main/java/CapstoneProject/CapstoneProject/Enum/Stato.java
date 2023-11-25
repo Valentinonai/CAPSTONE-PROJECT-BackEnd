@@ -1,5 +1,5 @@
 package CapstoneProject.CapstoneProject.Enum;
 
-public enum Ruolo {
-    ADMIN,USER,INATTIVO
+public enum Stato {
+    ATTIVO,INATTIVO
 }

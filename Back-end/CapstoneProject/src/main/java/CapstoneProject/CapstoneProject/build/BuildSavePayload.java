@@ -8,10 +8,7 @@ import java.util.List;
 
 public record BuildSavePayload(
 
-        @NotNull(message = "La lista items noon può essere vuota")
-        List<Item> items,
-
-        @NotNull(message = "Lo user non può essere vuoto")
-        User user
+        @NotNull(message = "La lista items non può essere vuota")
+        List<Item> items
 ) {
 }

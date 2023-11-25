@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.Enum.Ruolo;
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
@@ -58,7 +59,6 @@ public class User implements UserDetails {
     @Temporal(TemporalType.DATE)
     protected LocalDate data_creazione;
 
-
     @Column(name = "ruolo")
     @Enumerated(EnumType.STRING)
     private Ruolo ruolo;
@@ -66,12 +66,12 @@ public class User implements UserDetails {
 
     //Dati di pagamento
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",fetch = FetchType.EAGER)
     private CartaDiCredito cartaDiCredito;
 
     //Dati Spedizione
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",fetch = FetchType.EAGER)
     private IndirizzoDiSpedizione indirizzoSpedizione;
 
     //Build
@@ -113,7 +113,9 @@ public boolean getHasDatiOrdine(){
     //Setters
 
 
-
+    public void setRuolo(Ruolo ruolo) {
+        this.ruolo = ruolo;
+    }
 
     public void setImmagineUrl(String immagineUrl) {
         this.immagineUrl = immagineUrl;

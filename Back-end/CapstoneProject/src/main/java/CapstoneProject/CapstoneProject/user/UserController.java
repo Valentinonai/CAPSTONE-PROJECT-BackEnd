@@ -54,8 +54,16 @@ public class UserController {
 
 
     @PutMapping("/carica_immagine/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public User caricaImmagine(@AuthenticationPrincipal User u, @RequestParam("user_img") MultipartFile file) throws IOException {
        return userService.uploadImg(file,u.getId());
+    }
+
+    @DeleteMapping("/elimina/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void canccellaBuild(@AuthenticationPrincipal User u){
+        userService.deleteUser(u.getId());
     }
 
 

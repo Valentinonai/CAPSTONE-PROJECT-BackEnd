@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.carta_di_credito;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "carte_di_credito")
 public class CartaDiCredito {
@@ -35,6 +37,10 @@ public class CartaDiCredito {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+
+    @Column(name = "stato")
+    @Enumerated(EnumType.STRING)
+    private Stato stato=Stato.ATTIVO;
 
 
     //metodi e costruttori

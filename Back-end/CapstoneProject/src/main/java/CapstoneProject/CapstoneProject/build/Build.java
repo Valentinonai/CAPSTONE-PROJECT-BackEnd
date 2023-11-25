@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.build;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.order.Ordine;
 import CapstoneProject.CapstoneProject.user.User;
@@ -32,6 +33,10 @@ public class Build {
     @Column(name = "prezzo")
     private double prezzo;
 
+    @Column(name = "stato")
+    @Enumerated(EnumType.STRING)
+    private Stato stato=Stato.ATTIVO;
+
     @ManyToMany
     @JoinTable(name = "build_ordine", joinColumns = @JoinColumn(name = "build_id"), inverseJoinColumns = @JoinColumn(name = "ordine_id"))
     @JsonIgnore
@@ -49,6 +54,10 @@ public class Build {
 
     //metodi e costruttori
 
+
+    public void setStato(Stato stato) {
+        this.stato = stato;
+    }
 
     public Build(List<Item> items, User user) {
         this.prezzo = calcolatot(items);

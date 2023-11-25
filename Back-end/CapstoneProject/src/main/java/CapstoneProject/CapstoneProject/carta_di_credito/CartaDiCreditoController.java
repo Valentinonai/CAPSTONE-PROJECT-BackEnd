@@ -37,6 +37,7 @@ public class CartaDiCreditoController {
     }
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public CartaDiCredito aggiungiIndirizzo(@RequestBody @Validated CartaDiCreditoPayLoad body, BindingResult validation, @AuthenticationPrincipal User u){
         User user=userService.getSingleUser(u.getId());
         if(user.getCartaDiCredito()==null)
@@ -53,6 +54,7 @@ public class CartaDiCreditoController {
     }
 
     @PutMapping("/modifica_carta/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public  CartaDiCredito modificaIndirizzo(@RequestBody ModificaCarta body, @AuthenticationPrincipal User u){
         return cartaDiCreditoService.modifyCartaDiCredito(body,u);
     }

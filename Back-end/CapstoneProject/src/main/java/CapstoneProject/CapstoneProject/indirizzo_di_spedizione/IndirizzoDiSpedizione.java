@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.indirizzo_di_spedizione;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.order.Ordine;
 import CapstoneProject.CapstoneProject.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,6 +46,9 @@ public class IndirizzoDiSpedizione {
     @OneToMany(mappedBy = "indirizzo_di_spedizione")
     @JsonIgnore
     private List<Ordine> ordini;
+    @Column(name = "stato")
+    @Enumerated(EnumType.STRING)
+    private Stato stato=Stato.ATTIVO;
 
     //metodi e costruttori
 

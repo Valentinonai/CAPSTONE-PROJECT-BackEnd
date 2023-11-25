@@ -1,5 +1,7 @@
-package CapstoneProject.CapstoneProject.indirizzo_di_spedizione;
+package CapstoneProject.CapstoneProject.build;
 
+import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
+import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCreditoPayLoad;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
 import CapstoneProject.CapstoneProject.exception.Unauthorized;
 import CapstoneProject.CapstoneProject.user.User;
@@ -14,45 +16,45 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/indirizzi")
-public class IndirizzoController {
+@RequestMapping("/builds")
+public class BuildController {
+
     @Autowired
-    private IndirizzoDiSpedizioneService indirizzoDiSpedizioneService;
+    private BuildService buildService;
     @Autowired
     private UserService userService;
 
     @GetMapping()
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Page<IndirizzoDiSpedizione> getAllIndirizzi(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "id") String order){
-        return indirizzoDiSpedizioneService.getAllIndirizzi(page,size>20?10:size,order);
+    public Page<Build> getAllBuilds(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
+        return buildService.getAllBuilds(page,size>20?10:size,order);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public IndirizzoDiSpedizione getSingleIndirizzo(@PathVariable long id){
-        return indirizzoDiSpedizioneService.getSingleIndirizzo(id);
+    public Build getSingleBuild(@PathVariable long id){
+        return buildService.getSingleBuild(id);
     }
+
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public IndirizzoDiSpedizione aggiungiIndirizzo(@RequestBody @Validated IndirizzoDiSpedizionePayLoad body, BindingResult validation,@AuthenticationPrincipal User u){
+    public Build creaBuild(@RequestBody @Validated BuildSavePayload body, BindingResult validation, @AuthenticationPrincipal User u){
         User user=userService.getSingleUser(u.getId());
-        if(user.getIndirizzoSpedizione()==null)
-        {
             if(validation.hasErrors())
             {
                 throw new BadRequest(validation.getAllErrors());
             }
-            return indirizzoDiSpedizioneService.saveIndirizzo(body,user);
-        }else {
-            throw new Unauthorized("Hai già un indirizzo associato non puoi crearne uno nuovo");
+            return buildService.saveBuild(body,user);
         }
 
+    @DeleteMapping("/cancella_build/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public void canccellaBuild(@PathVariable long id){
+        buildService.deleteBuild(id);
     }
 
-    @PutMapping("/modifica_indirizzo/me")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public  IndirizzoDiSpedizione modificaIndirizzo(@RequestBody ModificaIndirizzoPayLoad body, @AuthenticationPrincipal User u){
-       return indirizzoDiSpedizioneService.modifyIndirizzo(body,u);
-    }
+
 }
+

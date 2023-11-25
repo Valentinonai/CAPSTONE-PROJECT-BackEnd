@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.item;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.order.Ordine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,6 +57,10 @@ public abstract class Item {
     @Enumerated(EnumType.STRING)
     protected Categoria categoria;
 
+    @Column(name = "stato")
+    @Enumerated(EnumType.STRING)
+    private Stato stato=Stato.ATTIVO;
+
     @ManyToMany
     @JoinTable(name = "item_ordine",joinColumns = @JoinColumn(name = "item_id"),inverseJoinColumns = @JoinColumn(name ="ordine_id" ))
     private List<Ordine> ordini;
@@ -84,6 +89,10 @@ public abstract class Item {
         this.potenza_di_picco = potenza_di_picco;
         this.quantità = quantità;
         this.categoria = categoria;
+    }
+
+    public void setStato(Stato stato) {
+        this.stato = stato;
     }
 
     public void setMarca(String marca) {

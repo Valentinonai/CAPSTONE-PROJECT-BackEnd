@@ -1,12 +1,16 @@
 package CapstoneProject.CapstoneProject.build;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BuildService {
@@ -23,8 +27,8 @@ public class BuildService {
         return buildRepository.findById(id).orElseThrow(() -> new NotFoundException("Elemento non trovato"));
     }
 
-    public Build saveBuild(BuildSavePayload body) {
-        Build b = new Build(body.items(), body.user());
+    public Build saveBuild(BuildSavePayload body, User u) {
+        Build b = new Build(body.items(), u);
 
         return buildRepository.save(b);
     }
@@ -36,8 +40,18 @@ public class BuildService {
         return buildRepository.save(b);
     }
 
-    public void deleteBuild(Build b) {
-        Build build = getSingleBuild(b.getId());
-        buildRepository.delete(build);
+    public void deleteBuild(long id) {
+        Build build = getSingleBuild(id);
+        build.setStato(Stato.INATTIVO);
+        buildRepository.save(build);
+//        buildRepository.delete(build);
+    }
+    public void setBuildInattiva(List<Build> builds){
+        for(int i=0;i<builds.size();i++){
+            Build b=getSingleBuild(builds.get(i).getId());
+            b.setStato(Stato.INATTIVO);
+            buildRepository.save(b);
+
+        }
     }
 }

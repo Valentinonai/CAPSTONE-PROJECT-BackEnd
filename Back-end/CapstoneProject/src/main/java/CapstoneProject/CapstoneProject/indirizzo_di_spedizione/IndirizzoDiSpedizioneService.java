@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.indirizzo_di_spedizione;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,10 @@ public class IndirizzoDiSpedizioneService {
         indirizzoDiSpedizioneRepository.delete(i);
     }
 
+    public void setIndirizzoInattivo(long id){
+        IndirizzoDiSpedizione i=getSingleIndirizzo(id);
+        i.setStato(Stato.INATTIVO);
+        indirizzoDiSpedizioneRepository.save(i);
+    }
 
 }

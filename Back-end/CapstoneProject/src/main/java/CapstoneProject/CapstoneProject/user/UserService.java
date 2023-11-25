@@ -1,9 +1,15 @@
 package CapstoneProject.CapstoneProject.user;
 
+import CapstoneProject.CapstoneProject.Enum.Ruolo;
+
+import CapstoneProject.CapstoneProject.build.BuildService;
+import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
+import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCreditoService;
 import CapstoneProject.CapstoneProject.cloudinary.CloudinaryService;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizionePayLoad;
+import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizioneService;
 import CapstoneProject.CapstoneProject.item.Item;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -29,6 +35,12 @@ public class UserService {
     private CloudinaryService cloudinaryService;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private IndirizzoDiSpedizioneService indirizzoDiSpedizioneService;
+    @Autowired
+    private CartaDiCreditoService cartaDiCreditoService;
+    @Autowired
+    private BuildService buildService;
 
     public Page<User> getAllUsers(int page,int size,String order){
         Pageable p= PageRequest.of(page,size, Sort.by(order));
@@ -58,7 +70,15 @@ public class UserService {
 
     public void deleteUser(long id){
         User u=getSingleUser(id);
-        userRepository.delete(u);
+        u.setRuolo(Ruolo.INATTIVO);
+        if(u.getIndirizzoSpedizione()!=null)
+        indirizzoDiSpedizioneService.setIndirizzoInattivo(u.getIndirizzoSpedizione().getId());
+        if(u.getCartaDiCredito()!=null)
+        cartaDiCreditoService.setCartaInattiva(u.getCartaDiCredito().getId());
+        if(u.getBuilds()!=null)
+        buildService.setBuildInattiva(u.getBuilds());
+//        userRepository.delete(u);
+        userRepository.save(u);
     }
 
     public User findByEmail(String email){

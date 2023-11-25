@@ -1,6 +1,8 @@
 package CapstoneProject.CapstoneProject.carta_di_credito;
 
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizione;
 import CapstoneProject.CapstoneProject.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,5 +41,10 @@ public class CartaDiCreditoService {
     public void deleteCartaDiCredito(User user) {
         CartaDiCredito c = getSingleCartaDiCredito(user.getCartaDiCredito().getId());
         cartaDiCreditoRepository.delete(c);
+    }
+    public void setCartaInattiva(long id){
+       CartaDiCredito c=getSingleCartaDiCredito(id);
+        c.setStato(Stato.INATTIVO);
+       cartaDiCreditoRepository.save(c);
     }
 }

@@ -1,4 +1,4 @@
-package Esercizio14112023Progetto.Esercizio14112023Progetto.security;
+package CapstoneProject.CapstoneProject.security;
 
 import CapstoneProject.CapstoneProject.security.CustomFilter;
 import CapstoneProject.CapstoneProject.security.FilterExceptions;

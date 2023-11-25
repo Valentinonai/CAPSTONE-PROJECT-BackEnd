@@ -11,15 +11,11 @@ import java.util.List;
 
 public record OrdinePayLaod(
 
-
-
-        @NotNull(message = "Il campo indirizzo non può essere vuoto")
-        IndirizzoDiSpedizione indirizzo_di_spedizione,
         @NotNull(message = "Il campo user non può essere vuoto")
-        User user,
-        @NotNull(message = "Il campo builds non può essere vuoto")
+        long  user_id,
+
         List<Build> builds,
-        @NotNull(message = "Il campo items non può essere vuoto")
+
         List<Item> items
 ) {
 }

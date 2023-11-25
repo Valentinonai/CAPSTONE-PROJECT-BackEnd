@@ -3,6 +3,8 @@ package CapstoneProject.CapstoneProject.user;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
 import CapstoneProject.CapstoneProject.exception.ListErrorsPayload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +23,13 @@ public class UserController {
 
         return userService.modificaPassword(body,u.getId());
 
+    }
+
+    @DeleteMapping("/elimina/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void eliminaUtente(@PathVariable long id){
+        userService.deleteUser(id);
     }
 
 }

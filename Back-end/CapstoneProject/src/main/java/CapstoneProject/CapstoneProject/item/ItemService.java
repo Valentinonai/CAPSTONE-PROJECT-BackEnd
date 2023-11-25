@@ -1,19 +1,25 @@
 package CapstoneProject.CapstoneProject.item;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
+import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.alimentatore.Alimentatore;
 import CapstoneProject.CapstoneProject.alimentatore.AlimentatorePayLoad;
+import CapstoneProject.CapstoneProject.alimentatore.AlimentatoreRepository;
 import CapstoneProject.CapstoneProject.boxCase.BoxCase;
 import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
+import CapstoneProject.CapstoneProject.boxCase.BoxCaseRepository;
 import CapstoneProject.CapstoneProject.cpu.Cpu;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
+import CapstoneProject.CapstoneProject.cpu.CpuRepository;
+import CapstoneProject.CapstoneProject.exception.BadRequest;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.exception.ProdottoEsauritoException;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisk;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
+import CapstoneProject.CapstoneProject.ram.RamRepository;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGrafica;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadre;
@@ -42,6 +48,14 @@ public class ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private CpuRepository cpuRepository;
+    @Autowired
+    private RamRepository ramRepository;
+    @Autowired
+    private BoxCaseRepository boxCaseRepository;
+    @Autowired
+    private AlimentatoreRepository alimentatoreRepository;
 
     @Autowired
     private CloudinaryService cloudinaryService;
@@ -137,7 +151,7 @@ public class ItemService {
         i.setPrezzo(body.prezzo());
         return itemRepository.save(i);
     }
-   //----------------UPLOAD IMMAGINE----------------------
+   //--------------------UPLOAD IMMAGINE----------------------
 
     public Item uploadImg(MultipartFile file,long id) throws IOException {
         Item i=getSingleItem(id);
@@ -147,5 +161,43 @@ public class ItemService {
             i.setImmagineUrl(url);
             return itemRepository.save(i);
 
+    }
+
+
+    //------------------------QUERIES-----------------------------
+
+    public Page<Cpu> getCpuBySocket(int page,int size,String order,String socket){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return cpuRepository.findBySocket(p,socket);
+    }
+
+    public Page<Ram> getRamBySchedaMadre(int page,int size,String order,long schedaMadre_id){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return ramRepository.findBySchedaId(p,schedaMadre_id);
+    }
+    public Page<BoxCase> getBoxCaseByFormato(int page,int size,String order,String tipo){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        if(tipo.equalsIgnoreCase("ATX") || tipo.equalsIgnoreCase("MICRO_ATX") || tipo.equalsIgnoreCase("MINI_ITX") )
+        return boxCaseRepository.findByFormato(p,Formato.valueOf(tipo.toUpperCase()));
+        else    throw new BadRequest("Formato scelto inesistente");
+    }
+
+    public Page<Alimentatore> getAlimentatoreByPotenza(int page,int size,String order,int power){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return alimentatoreRepository.findByPotenza_max_erogataGreaterThan(p,power);
+    }
+    public Page<Item> getByCategoria(int page,int size,String order,String cat){
+        if(cat.equalsIgnoreCase("SCHEDA_MADRE")||
+                cat.equalsIgnoreCase("CPU")||
+                cat.equalsIgnoreCase("RAM")||
+                cat.equalsIgnoreCase("CASE")||
+                cat.equalsIgnoreCase("SCHEDA_GRAFICA")||
+                cat.equalsIgnoreCase("HARD_DISK")||
+                cat.equalsIgnoreCase("VENTOLE")||
+                cat.equalsIgnoreCase("ALIMENTATORE")){
+            Pageable p=PageRequest.of(page,size,Sort.by(order));
+            return itemRepository.findByCategoria(p,Categoria.valueOf(cat.toUpperCase()));
+        }
+        else throw new BadRequest("Categoria inserita inesistente");
     }
 }

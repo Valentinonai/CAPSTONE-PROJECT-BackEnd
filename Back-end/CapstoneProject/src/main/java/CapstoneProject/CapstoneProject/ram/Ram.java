@@ -25,7 +25,7 @@ public class Ram extends Item {
     @Column(name = "dimensione",nullable = false)
     private int dimensione;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "schedamadre_ram",joinColumns = @JoinColumn(name = "ram") ,inverseJoinColumns =@JoinColumn(name = "scheda_madre"))
     private Set<SchedaMadre> lista_schedemadri;
 

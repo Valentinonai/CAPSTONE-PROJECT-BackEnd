@@ -176,24 +176,23 @@ public class ItemService {
 
     public Page<Cpu> getCpuBySocket(int page,int size,String order,String socket){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
-        return cpuRepository.findBySocket(p,socket);
+        return cpuRepository.findBySocketAndStato(p,socket,Stato.ATTIVO);
     }
 
     public Page<Ram> getRamBySchedaMadre(int page,int size,String order,long schedaMadre_id){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
-//    return ramRepository.findBySchedaId(p,schedaMadre_id);
     return ramRepository.findBySchedaMadreId(p,schedaMadre_id);
     }
     public Page<BoxCase> getBoxCaseByFormato(int page,int size,String order,String tipo){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
         if(tipo.equalsIgnoreCase("ATX") || tipo.equalsIgnoreCase("MICRO_ATX") || tipo.equalsIgnoreCase("MINI_ITX") )
-        return boxCaseRepository.findByFormato(p,Formato.valueOf(tipo.toUpperCase()));
+        return boxCaseRepository.findByFormatoAndStato(p,Formato.valueOf(tipo.toUpperCase()),Stato.ATTIVO);
         else    throw new BadRequest("Formato scelto inesistente");
     }
 
     public Page<Alimentatore> getAlimentatoreByPotenza(int page,int size,String order,int power){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
-        return alimentatoreRepository.findByPotenza_max_erogataGreaterThan(p,power);
+        return alimentatoreRepository.findByPotenza_max_erogataGreaterThanAndStato(p,power,Stato.ATTIVO);
 
     }
     public Page<Item> getByCategoria(int page,int size,String order,String cat){
@@ -206,7 +205,7 @@ public class ItemService {
                 cat.equalsIgnoreCase("VENTOLE")||
                 cat.equalsIgnoreCase("ALIMENTATORE")){
             Pageable p=PageRequest.of(page,size,Sort.by(order));
-            return itemRepository.findByCategoria(p,Categoria.valueOf(cat.toUpperCase()));
+            return itemRepository.findByCategoriaAndStato(p,Categoria.valueOf(cat.toUpperCase()),Stato.ATTIVO);
         }
         else throw new BadRequest("Categoria inserita inesistente");
     }

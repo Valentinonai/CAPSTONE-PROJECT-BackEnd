@@ -11,6 +11,7 @@ import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpediz
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizionePayLoad;
 import CapstoneProject.CapstoneProject.indirizzo_di_spedizione.IndirizzoDiSpedizioneService;
 import CapstoneProject.CapstoneProject.item.Item;
+import CapstoneProject.CapstoneProject.item.ItemService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -41,6 +43,8 @@ public class UserService {
     private CartaDiCreditoService cartaDiCreditoService;
     @Autowired
     private BuildService buildService;
+    @Autowired
+    private ItemService itemService;
 
     public Page<User> getAllUsers(int page,int size,String order){
         Pageable p= PageRequest.of(page,size, Sort.by(order));
@@ -100,4 +104,22 @@ public class UserService {
         return userRepository.save(u);
 
     }
+
+    public Set<Item> aggiungiPreferiti(long item_id,long user_id)
+    {
+        User u=getSingleUser(user_id);
+        Item i=itemService.getSingleItem(item_id);
+        u.setItems(i);
+        userRepository.save(u);
+        return u.getItems();
+    }
+    public Set<Item> rimuoviPreferiti(long item_id,long user_id)
+    {
+        User u=getSingleUser(user_id);
+        Item i=itemService.getSingleItem(item_id);
+      u.deleteItem(i);
+      userRepository.save(u);
+        return u.getItems();
+    }
+
 }

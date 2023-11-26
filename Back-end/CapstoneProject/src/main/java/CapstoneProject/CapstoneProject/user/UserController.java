@@ -1,6 +1,7 @@
 package CapstoneProject.CapstoneProject.user;
 
 import CapstoneProject.CapstoneProject.exception.BadRequest;
+import CapstoneProject.CapstoneProject.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -62,4 +64,14 @@ public class UserController {
     }
 
 
+    @PutMapping("/aggiungi_preferiti/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Set<Item> aggiungiPreferiti(@AuthenticationPrincipal User u,@RequestParam long item_id){
+        return userService.aggiungiPreferiti(item_id,u.getId());
+    }
+    @PutMapping("/rimuovi_preferiti/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Set<Item> rimuoviPreferiti(@AuthenticationPrincipal User u,@RequestParam long item_id){
+        return userService.rimuoviPreferiti(item_id,u.getId());
+    }
 }

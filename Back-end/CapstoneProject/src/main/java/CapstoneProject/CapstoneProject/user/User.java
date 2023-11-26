@@ -161,6 +161,7 @@ public boolean getHasDatiOrdine(){
     public void setItems(Item item) {
         this.items.add(item);
     }
+    public void deleteItem(Item item){this.items.remove(item);}
 
 //Metodi dell'interfaccia
 

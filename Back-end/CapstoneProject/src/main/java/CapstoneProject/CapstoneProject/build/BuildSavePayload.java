@@ -9,6 +9,6 @@ import java.util.List;
 public record BuildSavePayload(
 
         @NotNull(message = "La lista items non può essere vuota")
-        List<Item> items
+        List<Long> items_id
 ) {
 }

@@ -36,6 +36,11 @@ public class BuildController {
         return buildService.getSingleBuild(id);
     }
 
+    @GetMapping("/user_builds/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<Build> getAllBuilds(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@AuthenticationPrincipal User u){
+        return buildService.getAllBuildsAttive(page,size>20?10:size,order,u.getId());
+    }
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
@@ -47,7 +52,16 @@ public class BuildController {
             }
             return buildService.saveBuild(body,user);
         }
-
+    @PutMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Build modificaBuild(@RequestBody @Validated BuildSavePayload body, BindingResult validation,@RequestParam long build_id){
+        if(validation.hasErrors())
+        {
+            throw new BadRequest(validation.getAllErrors());
+        }
+        return buildService.modifyBuild(body,build_id);
+    }
     @DeleteMapping("/cancella_build/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")

@@ -72,6 +72,10 @@ public class ItemService {
         return itemRepository.findById(id).orElseThrow(()->new NotFoundException("Elemento non trovato"));
     }
 
+    public Page<Item> getAllAttivi(int page,int size,String order){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return itemRepository.getAllAttivi(p,Stato.ATTIVO);
+    }
     //----------------------SAVE-----------------------
     public Item saveSchedaMadre(SchedaMadrePayLoad body){
         if(body.formato().equalsIgnoreCase("ATX") ||

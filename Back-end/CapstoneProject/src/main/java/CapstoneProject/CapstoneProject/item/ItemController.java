@@ -32,7 +32,7 @@ public class ItemController {
 
     //------------------------EndPoint per Items-------------------------------
     @GetMapping()
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Item> getAllItems(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
         return itemService.getAllItems(page,size>20?10:size,order);
     }
@@ -43,6 +43,11 @@ public class ItemController {
         return itemService.getSingleItem(id);
     }
 
+    @GetMapping("/get_attivi")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<Item> getAllAttivi(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
+        return itemService.getAllAttivi(page,size>20?10:size,order);
+    }
     @DeleteMapping("/cancella_item/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)

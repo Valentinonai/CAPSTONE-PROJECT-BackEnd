@@ -79,6 +79,7 @@ public class Build {
     public void setItems(List<Item> items) {
         this.items.removeAll(this.items);
         this.items = items;
+        this.prezzo=calcolatot(items);
     }
 
     public double calcolatot(List<Item> items) {

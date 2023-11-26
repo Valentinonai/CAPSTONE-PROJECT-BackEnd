@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ordini")
 public class OrderController {
@@ -35,6 +37,12 @@ public class OrderController {
         return ordineService.getSingleOrdine(id);
     }
 
+    @GetMapping("/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<Ordine> getUserOrdini(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@AuthenticationPrincipal User u){
+        return ordineService.getUserOrdini(page,size>20?10:size,order,u);
+    }
+
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
@@ -50,7 +58,7 @@ public class OrderController {
     @DeleteMapping("/elimina_ordine/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public void canccellaOrdine(@PathVariable long id){
+    public void cancellaOrdine(@PathVariable long id){
         ordineService.eliminaOrdine(id);
     }
 

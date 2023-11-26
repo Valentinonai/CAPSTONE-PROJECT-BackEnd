@@ -1,9 +1,6 @@
 package CapstoneProject.CapstoneProject.build;
 
-import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCredito;
-import CapstoneProject.CapstoneProject.carta_di_credito.CartaDiCreditoPayLoad;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
-import CapstoneProject.CapstoneProject.exception.Unauthorized;
 import CapstoneProject.CapstoneProject.user.User;
 import CapstoneProject.CapstoneProject.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

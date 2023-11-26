@@ -2,7 +2,9 @@ package CapstoneProject.CapstoneProject.order;
 
 import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
+import CapstoneProject.CapstoneProject.build.BuildService;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.item.ItemPayLoadQuantita;
 import CapstoneProject.CapstoneProject.item.ItemService;
 import CapstoneProject.CapstoneProject.user.ModificaHasOrdinePayLoad;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrdineService {
@@ -26,6 +29,8 @@ public class OrdineService {
     private OrdineRepository ordineRepository;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private BuildService buildService;
 
     @Autowired
     private UserService userService;
@@ -40,44 +45,50 @@ public class OrdineService {
     }
 
     public Ordine saveOrdine(OrdinePayLaod body,long user_id){
+        List<Build> buildList=new ArrayList<>();
+        List<Item> itemList=new ArrayList<>();
+        for(int i=0;i<body.builds_id().size();i++)    buildList.add(buildService.getSingleBuild(body.builds_id().get(i)));
+        for(int i=0;i<body.items_id().size();i++)    itemList.add(itemService.getSingleItem(body.items_id().get(i)));
         User u=userService.getSingleUser(user_id);
-        Ordine o=new Ordine(u.getIndirizzoSpedizione(),u,body.builds(),body.items());
+
         boolean check=false;
-        List<Integer> elementiDaRimuovere=new ArrayList<>();
+        List<Build> elementiDaRimuovere=new ArrayList<>();
         if(!u.getHasDatiOrdine())   userService.modificaHasOrdine(new ModificaHasOrdinePayLoad(true),u.getId());
-        if(body.builds().size()>0)
+
+        if(buildList.size()>0)
         {
-            for(int i=0;i<body.builds().size();i++){
-                for(int j=0;j< body.builds().get(i).getItems().size();j++){
-                    if(body.builds().get(i).getItems().get(j).getQuantità()==0)
+            for(int i=0;i<buildList.size();i++){
+                for(int j=0;j< buildList.get(i).getItems().size();j++){
+                    if(buildList.get(i).getItems().get(j).getQuantità()==0)
                         check=true;
                 }
                 if(check==false){
-                    for(int j=0;j< body.builds().get(i).getItems().size();j++){
-                        itemService.scalaQuandita(body.builds().get(i).getItems().get(j).getId());
+                    for(int j=0;j< buildList.get(i).getItems().size();j++){
+                        itemService.scalaQuandita(buildList.get(i).getItems().get(j).getId());
                     }
                 }
                 else{
-                   elementiDaRimuovere.add(i);
+                   elementiDaRimuovere.add(buildList.get(i));
                    check=false;
                 }
             }
            for(int i=0;i<elementiDaRimuovere.size();i++){
-               body.builds().remove(i);
+              buildList.remove(elementiDaRimuovere.get(i));
            }
         }
-        elementiDaRimuovere.removeAll(elementiDaRimuovere);
-        for(int i=0;i<body.items().size();i++){
-            if(body.items().get(i).getQuantità()==0){
-              elementiDaRimuovere.add(i);
+        List<Item> itemsDaRimuovere=new ArrayList<>();
+        for(int i=0;i<itemList.size();i++){
+            if(itemList.get(i).getQuantità()==0){
+            itemsDaRimuovere.add(itemList.get(i));
             }else{
-                itemService.scalaQuandita(body.items().get(i).getId());
+                itemService.scalaQuandita(itemList.get(i).getId());
             }
 
         }
-        for(int i=0;i<elementiDaRimuovere.size();i++){
-            body.items().remove(i);
+        for(int i=0;i<itemsDaRimuovere.size();i++){
+            itemList.remove(itemsDaRimuovere.get(i));
         }
+        Ordine o=new Ordine(u.getIndirizzoSpedizione(),u,buildList,itemList);
         ordineRepository.save(o);
         return o;
     }
@@ -87,4 +98,9 @@ Ordine o=getSingleOrdine(id);
 o.setStato(Stato.INATTIVO);
 ordineRepository.save(o);
 }
+
+    public Page<Ordine> getUserOrdini(int page,int size,String order,User u) {
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return ordineRepository.findByUser(p,u.getId());
+    }
 }

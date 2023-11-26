@@ -63,6 +63,7 @@ public abstract class Item {
 
     @ManyToMany
     @JoinTable(name = "item_ordine",joinColumns = @JoinColumn(name = "item_id"),inverseJoinColumns = @JoinColumn(name ="ordine_id" ))
+    @JsonIgnore
     private List<Ordine> ordini;
 
 

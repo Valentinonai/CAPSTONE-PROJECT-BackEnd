@@ -11,8 +11,8 @@ import java.util.List;
 
 public record OrdinePayLaod(
 
-        List<Build> builds,
+        List<Long> builds_id,
 
-        List<Item> items
+        List<Long> items_id
 ) {
 }

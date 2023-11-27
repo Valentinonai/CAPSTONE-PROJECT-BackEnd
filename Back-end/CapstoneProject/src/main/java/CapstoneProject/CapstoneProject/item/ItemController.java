@@ -12,6 +12,7 @@ import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
+import CapstoneProject.CapstoneProject.ventole.Ventola;
 import CapstoneProject.CapstoneProject.ventole.VentolePayLoad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -193,5 +194,12 @@ public class ItemController {
     public Page<Item> getAllByCategoria(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String categoria){
         if(categoria!=null)    return itemService.getByCategoria(page,size>20?10:size,order,categoria);
         else throw new BadRequest("Parametro categoria non valido");
+    }
+
+    @GetMapping("/ventole")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<Ventola> getVentoleByDimensione(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "id") String order,@RequestParam(defaultValue = "120") String dimensione){
+        if(dimensione!=null)    return itemService.findByVentolaDimensione(page,size>20?10:size,order,Integer.parseInt(dimensione));
+        else    throw new BadRequest("Il valore dimensione non è corretto");
     }
 }

@@ -27,6 +27,7 @@ import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
 import CapstoneProject.CapstoneProject.cloudinary.CloudinaryService;
 import CapstoneProject.CapstoneProject.ventole.Ventola;
 import CapstoneProject.CapstoneProject.ventole.VentolePayLoad;
+import CapstoneProject.CapstoneProject.ventole.VentoleRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,8 @@ public class ItemService {
     private BoxCaseRepository boxCaseRepository;
     @Autowired
     private AlimentatoreRepository alimentatoreRepository;
+    @Autowired
+    private VentoleRepository ventoleRepository;
 
     @Autowired
     private CloudinaryService cloudinaryService;
@@ -212,5 +215,10 @@ public class ItemService {
             return itemRepository.findByCategoriaAndStato(p,Categoria.valueOf(cat.toUpperCase()),Stato.ATTIVO);
         }
         else throw new BadRequest("Categoria inserita inesistente");
+    }
+
+    public Page<Ventola> findByVentolaDimensione(int page,int size,String order,int dimensione){
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return ventoleRepository.findByDimensioneAndStato(p,dimensione,Stato.ATTIVO);
     }
 }

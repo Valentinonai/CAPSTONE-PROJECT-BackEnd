@@ -11,6 +11,7 @@ import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
 import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
+import CapstoneProject.CapstoneProject.ventole.VentolePayLoad;
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -173,8 +174,34 @@ public class FillDatabaseRunner implements CommandLineRunner {
 
         itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3070Ti","NVIDIA® GeForce RTX™ 3070Ti.",799,LocalDate.of(2021,11,1),290,20,112,267,"1.77GHz",8));
 
-        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3070","NVIDIA® GeForce RTX™ 3070.",568,LocalDate.of(2021,11,1),220,20,112,242,"1.73GHz",8));*/
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3070","NVIDIA® GeForce RTX™ 3070.",568,LocalDate.of(2021,11,1),220,20,112,242,"1.73GHz",8));
 
         //--------------------------------------------VENTOLE----------------------------------------
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola PWM iCUE SP120 RGB ELITE Performance da 120 mm","Il kit da tre ventole CORSAIR iCUE SP120 RGB ELITE Performance vanta otto brillanti LED RGB regolabili singolarmente per ciascuna ventola, potenziando l’illuminazione RGB di qualsiasi PC.",79.90,LocalDate.of(2022,10,10),6,20,600,1500,true,120,3));
+
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola LL120 RGB, Dual Light Loop RGB LED PWM da 120 mm, confezione da 3 ventole con Lighting Node PRO","La ventola CORSAIR LL120 RGB LED PWM vanta 16 LED RGB indipendenti tra due anelli luminosi separati, per creare vibranti effetti visivi e di illuminazione.",114.90,LocalDate.of(2022,10,10),6,20,600,1500,true,120,3));
+
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola PWM a levitazione magnetica iCUE ML120 RGB ELITE Premium da 120 mm — kit da tre ventole con iCUE Lighting Node CORE","Il kit da tre ventole PWM a levitazione magnetica della linea CORSAIR iCUE ML120 RGB ELITE Premium da 120 mm vanta la tecnologia CORSAIR AirGuide e cuscinetti a levitazione magnetica per prestazioni di raffreddamento silenziose e potenti.",109.90,LocalDate.of(2022,10,10),6,20,600,1500,true,120,3));
+
+
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola PWM iCUE SP140 RGB ELITE Performance da 140 mm","Il kit da tre ventole CORSAIR iCUE SP120 RGB ELITE Performance vanta otto brillanti LED RGB regolabili singolarmente per ciascuna ventola, potenziando l’illuminazione RGB di qualsiasi PC.",99.90,LocalDate.of(2022,10,10),6,20,600,1500,true,140,3));
+
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola LL140 RGB, Dual Light Loop RGB LED PWM da 140 mm, confezione da 3 ventole con Lighting Node PRO","La ventola CORSAIR LL120 RGB LED PWM vanta 16 LED RGB indipendenti tra due anelli luminosi separati, per creare vibranti effetti visivi e di illuminazione.",144.90,LocalDate.of(2022,10,10),6,20,600,1500,true,140,3));
+
+        itemService.saveVentola(new VentolePayLoad("Corsair","Ventola PWM a levitazione magnetica iCUE ML140 RGB ELITE Premium da 140 mm — kit da tre ventole con iCUE Lighting Node CORE","Il kit da tre ventole PWM a levitazione magnetica della linea CORSAIR iCUE ML120 RGB ELITE Premium da 120 mm vanta la tecnologia CORSAIR AirGuide e cuscinetti a levitazione magnetica per prestazioni di raffreddamento silenziose e potenti.",129.90,LocalDate.of(2022,10,10),6,20,600,1500,true,140,3));
+
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","VMASTERFAN MF120 PRISMATIC 3 IN 1","The Addressable RGB lighting is even more vibrant with certified compatibility across all major motherboard manufacturers.",91.38,LocalDate.of(2022,10,10),6,20,650,2000,true,120,3));
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","VMASTERFAN MF140 PRISMATIC 3 IN 1","The Addressable RGB lighting is even more vibrant with certified compatibility across all major motherboard manufacturers.",111.90,LocalDate.of(2022,10,10),6,20,650,2000,true,140,3));
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","SICKLEFLOW 120 ARGB WHITE EDITION 3 IN 1","SickleFlow 120 ARGB White Edition, a new series of the CoolerMaster Fan family, provides a specific air cooling solution ideal for CPU coolers and chassis in-take fans.",47.15,LocalDate.of(2022,10,10),6,20,650,2000,true,120,3));
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","SICKLEFLOW 140 ARGB WHITE EDITION 3 IN 1","SickleFlow 140 ARGB White Edition, a new series of the CoolerMaster Fan family, provides a specific air cooling solution ideal for CPU coolers and chassis in-take fans.",67.85,LocalDate.of(2022,10,10),6,20,650,2000,true,140,3));
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","MASTERFAN MF120 HALO 3IN1","MasterFan MF120 Halo, a new series to the MasterFan family, provides a specific air cooling solution ideal for CPU coolers and chassis in-take fans.",52.98,LocalDate.of(2022,10,10),6,20,650,2000,true,120,3));
+
+        itemService.saveVentola(new VentolePayLoad("CoolerMaster","MASTERFAN MF140 HALO 3IN1","MasterFan MF140 Halo, a new series to the MasterFan family, provides a specific air cooling solution ideal for CPU coolers and chassis in-take fans.",71.28,LocalDate.of(2022,10,10),6,20,650,2000,true,140,3));*/
+
     }
 }

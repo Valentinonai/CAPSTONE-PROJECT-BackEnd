@@ -104,7 +104,7 @@ public class ItemService {
     public Item saveBoxCase(BoxCasePayLoad body){
         if(body.formato().equalsIgnoreCase("ATX") ||
                 body.formato().equalsIgnoreCase("MICRO_ATX") || body.formato().equalsIgnoreCase("MINI_ITX") ) {
-            BoxCase b = new BoxCase(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(), body.quantita(), Categoria.CASE,Formato.valueOf(body.formato().toUpperCase()) , body.num_ventole(), body.larghezza(), body.altezza(), body.profondità());
+            BoxCase b = new BoxCase(body.marca(), body.nome(), body.descrizione(), body.prezzo(), body.data_di_rilascio(), body.potenza_di_picco(), body.quantita(), Categoria.CASE,Formato.valueOf(body.formato().toUpperCase()) , body.num_ventole(), body.larghezza(), body.altezza(), body.profondità(), body.dimensione_ventole());
             return itemRepository.save(b);
         }
         else throw new BadRequest("Formato non disponibile");

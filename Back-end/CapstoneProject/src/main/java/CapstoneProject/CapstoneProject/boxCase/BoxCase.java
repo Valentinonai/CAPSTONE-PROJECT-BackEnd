@@ -32,25 +32,29 @@ public class BoxCase extends Item {
     private int altezza;
     @Column(name = "profondità_mm")
     private int profondità;
+    @Column(name = "dimensione_ventole")
+    private int dimensioneVentole;
 
     //metodi e costruttori
 
     public BoxCase(){}
 
-    public BoxCase(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, Formato formato, int num_ventole, int larghezza, int altezza, int profondità) {
+    public BoxCase(String marca, String nome, String descrizione, double prezzo, LocalDate data_di_rilascio, int potenza_di_picco, int quantità, Categoria categoria, Formato formato, int num_ventole, int larghezza, int altezza, int profondità,int dimensioneVentole) {
         super(marca, nome, descrizione, prezzo, data_di_rilascio, potenza_di_picco, quantità, categoria);
         this.formato = formato;
         this.num_ventole = num_ventole;
         this.larghezza = larghezza;
         this.altezza = altezza;
         this.profondità = profondità;
+        this.dimensioneVentole=dimensioneVentole;
     }
 
-    public BoxCase(Formato formato, int num_ventole, int larghezza, int altezza, int profondità) {
+    public BoxCase(Formato formato, int num_ventole, int larghezza, int altezza, int profondità,int dimensioneVentole) {
         this.formato = formato;
         this.num_ventole = num_ventole;
         this.larghezza = larghezza;
         this.altezza = altezza;
         this.profondità = profondità;
+        this.dimensioneVentole=dimensioneVentole;
     }
 }

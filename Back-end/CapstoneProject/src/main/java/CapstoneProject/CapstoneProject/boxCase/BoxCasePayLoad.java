@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.aspectj.bridge.IMessage;
 
 import java.time.LocalDate;
 
@@ -40,6 +41,9 @@ public record BoxCasePayLoad(
         int altezza,
         @NotNull(message = "Il campo profondità non può essere vuoto")
         @Min(0)
-         int profondità
+         int profondità,
+        @NotNull(message = "la dimensione delle ventole non può essere zero")
+        @Min(120)
+        int dimensione_ventole
 ) {
 }

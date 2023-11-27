@@ -2,6 +2,7 @@ package CapstoneProject.CapstoneProject;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.Enum.Formato;
+import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
 import CapstoneProject.CapstoneProject.item.ItemService;
 import CapstoneProject.CapstoneProject.ram.Ram;
@@ -88,6 +89,31 @@ public class FillDatabaseRunner implements CommandLineRunner {
 
         itemService.saveRam(new RamPayLoad("Corsair","DRAM DOMINATOR TITANIUM RGB 32 GB ","La memoria DDR5 CORSAIR DOMINATOR TITANIUM RGB unisce un design pulito e raffinato ad una struttura in alluminio pressofuso di qualità superiore e un sistema di illuminazione all’avanguardia.",244.99,LocalDate.of(2023,10,10),6,10,"DDR5",4800,32, Arrays.asList(1L,2L,3L,4L,7L,8L)));
 
-        itemService.saveRam(new RamPayLoad("Corsair","Kit di memoria DDR5 DRAM DOMINATOR TITANIUM RGB 32 GB (2x16 GB) 6000 MT/s CL30 AMD EXPO – Grey ","La memoria DDR5 CORSAIR DOMINATOR TITANIUM RGB unisce un design pulito e raffinato ad una struttura in alluminio pressofuso di qualità superiore e un sistema di illuminazione all’avanguardia.",204.99,LocalDate.of(2023,10,10),6,20,"DDR5",4800,32, Arrays.asList(5L,6L,9L,10L)));*/
+        itemService.saveRam(new RamPayLoad("Corsair","Kit di memoria DDR5 DRAM DOMINATOR TITANIUM RGB 32 GB (2x16 GB) 6000 MT/s CL30 AMD EXPO – Grey ","La memoria DDR5 CORSAIR DOMINATOR TITANIUM RGB unisce un design pulito e raffinato ad una struttura in alluminio pressofuso di qualità superiore e un sistema di illuminazione all’avanguardia.",204.99,LocalDate.of(2023,10,10),6,20,"DDR5",4800,32, Arrays.asList(5L,6L,9L,10L)));
+
+        //-------------------------------------CASE--------------------------------------------------
+
+        itemService.saveBoxCase(new BoxCasePayLoad("Corsair","Case ATX Mid-Tower 4000D AIRFLOW con vetro temperato — Nero","CORSAIR 4000D AIRFLOW è un case ATX mid-tower dal design distintivo, ottimizzato per garantire un flusso d’aria elevato.",119.90,LocalDate.of(2022,10,1),0,20,"ATX",6,230,466,453,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("Corsair","Case PC ATX mid-tower in vetro temperato 5000D AIRFLOW, nero","CORSAIR 5000D AIRFLOW è un case ATX mid-tower che mette in risalto il tuo PC, senza far vedere i cavi.",134.90,LocalDate.of(2021,10,1),0,20,"ATX",6,245,520,520,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("Corsair","Case per PC ATX Full-Tower CORSAIR 7000D AIRFLOW — Nero","CORSAIR 7000D AIRFLOW è un case ATX full-tower pensato per le configurazioni più ambiziose.",239,LocalDate.of(2023,10,1),0,20,"ATX",7,248,600,550,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("Corsair","Case per PC Mini-ITX 2000D RGB AIRFLOW - Bianco","CORSAIR 2000D RGB AIRFLOW è un case Mini-ITX con fattore di forma ridotto che vanta un’illuminazione RGB vivace.",179,LocalDate.of(2023,10,1),0,20,"MINI_ITX",3,200,458,271,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","MASTERBOX TD500 MESH V2 RYU","MASTERBOX TD500 MESH V2 RYU",190,LocalDate.of(2023,10,1),0,20,"ATX",6,210,500,499,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","COSMOS C700M","Highly Versatile Layout Graphics Card Mounting with Riser Cable Addressable RGB Lighting Extensive Cable Cover System Aluminum Panels",489,LocalDate.of(2023,10,1),0,20,"ATX",10,306 ,651,650,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","HAF 700 EVO","HAF 700 EVO unveils a new era of thermal efficiency through unique features designed to transcend the standards of contemporary cooling solutions.",384,LocalDate.of(2022,10,1),0,20,"ATX",10,279 ,540,556,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","MASTERBOX TD500 MESH V2","MasterBox TD500 Mesh V2’s iconic polygonal design keeps your system looking unique and your gaming sessions streamlined.",115,LocalDate.of(2021,10,1),0,20,"ATX",10,210 ,500,499,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","CMP 520","CMP 520's asymmetrical front panel design frames the pre-installed three 120mm ARGB fans as unique centerpieces on the build.",125,LocalDate.of(2021,10,1),0,20,"ATX",6,204 ,463,439,120));
+
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","MASTERBOX K501L & K501L RGB","Gaming is in the core of the new MasterBox K501L. Donning an illuminated fan against the angled front panel ventilation speaks to its competitive character.",235,LocalDate.of(2022,10,1),0,20,"ATX",7,204 ,463,439,120));*/
+
+
+        //---------------------------------ALIMENTATORE--------------------------------------
     }
 }

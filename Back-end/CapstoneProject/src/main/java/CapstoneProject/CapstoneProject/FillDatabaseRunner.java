@@ -9,6 +9,7 @@ import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.item.ItemService;
 import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
+import CapstoneProject.CapstoneProject.scheda_grafica.SchedaGraficaPayload;
 import CapstoneProject.CapstoneProject.scheda_madre.SchedaMadrePayLoad;
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +133,7 @@ public class FillDatabaseRunner implements CommandLineRunner {
 
         itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","Alimentatore ATX RM Series interamente modulare RM650 da 650 Watt con certificazione 80 PLUS Gold (EU)","Gli alimentatori CORSAIR RM Series interamente modulari e a bassa rumorosità assicurano a un'ampia varietà di sistemi PC un’alimentazione affidabile e silenziosa con efficienza 80 PLUS Gold.",84.9,LocalDate.of(2022,10,1),0,20,650,true,2200));
 
-        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","SF-L Series SF850L Fully Modular Low-Noise SFX Power Supply (EU)","CORSAIR SF-L Series Fully Modular SFX Power Supplies with ATX 3.0 and PCIe 5.0 compliance provide the continuous high wattages demanded by the latest PC hardware, all in a space-saving SFX-L form-factor.",169.9,LocalDate.of(2022,10,1),0,20,850,true,2400));*/
+        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","SF-L Series SF850L Fully Modular Low-Noise SFX Power Supply (EU)","CORSAIR SF-L Series Fully Modular SFX Power Supplies with ATX 3.0 and PCIe 5.0 compliance provide the continuous high wattages demanded by the latest PC hardware, all in a space-saving SFX-L form-factor.",169.9,LocalDate.of(2022,10,1),0,20,850,true,2400));
 
         //---------------------------------Hard Disk---------------------------------------
 
@@ -146,5 +147,34 @@ public class FillDatabaseRunner implements CommandLineRunner {
 
         itemService.saveHardDisk(new HardDisskPayLoad("Corsair","SSD M.2 NVMe 2.0 PCIe Gen5 x4 MP700 PRO da 2 TB con sistema di raffreddamento ad aria","Sfrutta le prestazioni di archiviazione PCIe Gen5 con velocità di lettura e scrittura sequenziale sbalorditive e l’interfaccia NVMe 2.0 a larghezza di banda elevata, per prestazioni e durabilità eccezionali.",379.99,LocalDate.of(2023,10,8),12,50,true,"2Tb"));
 
+        //-----------------------------SCHEDA GRAFICA-------------------------------
+
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4090","NVIDIA® GeForce RTX™ 4090 è la GPU GeForce definitiva. Si tratta di un enorme passo avanti in termini di prestazioni, efficienza e grafica basata su IA.",1829,LocalDate.of(2022,11,1),450,20,137,304,"2.52GHz",24));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4080","NVIDIA® GeForce RTX™ 4080 offre le prestazioni e le funzionalità ultra che giocatori e creativi appassionati richiedono.",1349,LocalDate.of(2022,11,1),320,20,137,304,"2.51GHz",16));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4070Ti","Preparati a un'esperienza di gioco e creatività straordinaria con le schede grafiche NVIDIA® GeForce RTX™ 4070 Ti e RTX 4070.",800,LocalDate.of(2023,1,1),285,20,112,244,"2.61GHz",12));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4070","Preparati a un'esperienza di gioco e creatività straordinaria con le schede grafiche NVIDIA® GeForce RTX™ 4070 Ti e RTX 4070.",669,LocalDate.of(2022,11,1),200,20,112,244,"2.48GHz",12));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4060Ti","Gioca, trasmetti in streaming, crea. Le schede GeForce RTX™ 4060 Ti e RTX 4060 permettono di utilizzare i giochi e le app più recenti con l'architettura ultra efficiente NVIDIA Ada Lovelace.",430,LocalDate.of(2023,1,1),165,20,98,244,"2.54GHz",8));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX4060","Gioca, trasmetti in streaming, crea. Le schede GeForce RTX™ 4060 Ti e RTX 4060 permettono di utilizzare i giochi e le app più recenti con l'architettura ultra efficiente NVIDIA Ada Lovelace.",335,LocalDate.of(2022,11,1),115,20,98,244,"2.46GHz",8));
+
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3090Ti","NVIDIA® GeForce RTX™ 3090 Ti.",1495.95,LocalDate.of(2021,11,1),450,20,138,313,"1.86GHz",24));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3090","NVIDIA® GeForce RTX™ 3090.",1239,LocalDate.of(2021,11,1),350,20,138,313,"1.70GHz",24));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3080Ti","NVIDIA® GeForce RTX™ 3080Ti.",1099,LocalDate.of(2021,11,1),350,20,112,285,"1.67GHz",12));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3080","NVIDIA® GeForce RTX™ 3080.",1029.44,LocalDate.of(2021,11,1),350,20,112,285,"1.71GHz",10));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3070Ti","NVIDIA® GeForce RTX™ 3070Ti.",799,LocalDate.of(2021,11,1),290,20,112,267,"1.77GHz",8));
+
+        itemService.saveSchedaGrafica(new SchedaGraficaPayload("Nvidia","GeForce RTX3070","NVIDIA® GeForce RTX™ 3070.",568,LocalDate.of(2021,11,1),220,20,112,242,"1.73GHz",8));*/
+
+        //--------------------------------------------VENTOLE----------------------------------------
     }
 }

@@ -5,6 +5,7 @@ import CapstoneProject.CapstoneProject.Enum.Formato;
 import CapstoneProject.CapstoneProject.alimentatore.AlimentatorePayLoad;
 import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
+import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.item.ItemService;
 import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
@@ -132,6 +133,18 @@ public class FillDatabaseRunner implements CommandLineRunner {
         itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","Alimentatore ATX RM Series interamente modulare RM650 da 650 Watt con certificazione 80 PLUS Gold (EU)","Gli alimentatori CORSAIR RM Series interamente modulari e a bassa rumorosità assicurano a un'ampia varietà di sistemi PC un’alimentazione affidabile e silenziosa con efficienza 80 PLUS Gold.",84.9,LocalDate.of(2022,10,1),0,20,650,true,2200));
 
         itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","SF-L Series SF850L Fully Modular Low-Noise SFX Power Supply (EU)","CORSAIR SF-L Series Fully Modular SFX Power Supplies with ATX 3.0 and PCIe 5.0 compliance provide the continuous high wattages demanded by the latest PC hardware, all in a space-saving SFX-L form-factor.",169.9,LocalDate.of(2022,10,1),0,20,850,true,2400));*/
+
+        //---------------------------------Hard Disk---------------------------------------
+
+        itemService.saveHardDisk(new HardDisskPayLoad("Corsair","MP600 PRO LPX 8TB PCIe Gen4 x4 NVMe M.2 SSD","CORSAIR MP600 PRO LPX M.2 PCIe NVMe 1.4 Gen4 x 4 è un'unità SSD ad alte prestazioni ottimizzata per PS5, che potenzia la capacità di archiviazione della tua console fino a 8 TB.",1039,LocalDate.of(2023,10,8),12,50,true,"8Tb"));
+
+        itemService.saveHardDisk(new HardDisskPayLoad("Corsair","MP700 2TB PCIe 5.0 (Gen 5) x4 NVMe M.2 SSD","Harness the power of Gen5 SSD technology with NVMe 2.0 to enable faster read and write times, built with high-density 3D TLC NAND flash memory.",319,LocalDate.of(2023,10,8),12,50,true,"2Tb"));
+
+        itemService.saveHardDisk(new HardDisskPayLoad("Corsair","Unità SDD MP600 PRO NH 500 GB PCIe 4.0 (Gen 4) x4 NVMe M.2","L'unità SSD CORSAIR MP600 PRO NH sfrutta la tecnologia PCIe Gen4 per raggiungere fino a 7.000 MB/sec di velocità in lettura sequenziale e fino a 6.500 MB/sec in scrittura sequenziale.",74.99,LocalDate.of(2023,10,8),12,50,true,"500Gb"));
+
+        itemService.saveHardDisk(new HardDisskPayLoad("Corsair","MP700 1TB PCIe 5.0 (Gen 5) x4 NVMe M.2 SSD","Harness the power of Gen5 SSD technology with NVMe 2.0 to enable faster read and write times, built with high-density 3D TLC NAND flash memory.",189.99,LocalDate.of(2023,10,8),12,50,true,"1Tb"));
+
+        itemService.saveHardDisk(new HardDisskPayLoad("Corsair","SSD M.2 NVMe 2.0 PCIe Gen5 x4 MP700 PRO da 2 TB con sistema di raffreddamento ad aria","Sfrutta le prestazioni di archiviazione PCIe Gen5 con velocità di lettura e scrittura sequenziale sbalorditive e l’interfaccia NVMe 2.0 a larghezza di banda elevata, per prestazioni e durabilità eccezionali.",379.99,LocalDate.of(2023,10,8),12,50,true,"2Tb"));
 
     }
 }

@@ -2,6 +2,7 @@ package CapstoneProject.CapstoneProject;
 
 import CapstoneProject.CapstoneProject.Enum.Categoria;
 import CapstoneProject.CapstoneProject.Enum.Formato;
+import CapstoneProject.CapstoneProject.alimentatore.AlimentatorePayLoad;
 import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
 import CapstoneProject.CapstoneProject.item.ItemService;
@@ -111,9 +112,26 @@ public class FillDatabaseRunner implements CommandLineRunner {
 
         itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","CMP 520","CMP 520's asymmetrical front panel design frames the pre-installed three 120mm ARGB fans as unique centerpieces on the build.",125,LocalDate.of(2021,10,1),0,20,"ATX",6,204 ,463,439,120));
 
-        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","MASTERBOX K501L & K501L RGB","Gaming is in the core of the new MasterBox K501L. Donning an illuminated fan against the angled front panel ventilation speaks to its competitive character.",235,LocalDate.of(2022,10,1),0,20,"ATX",7,204 ,463,439,120));*/
+        itemService.saveBoxCase(new BoxCasePayLoad("CoolerMaster","MASTERBOX K501L & K501L RGB","Gaming is in the core of the new MasterBox K501L. Donning an illuminated fan against the angled front panel ventilation speaks to its competitive character.",235,LocalDate.of(2022,10,1),0,20,"ATX",7,204 ,463,439,120));
 
 
         //---------------------------------ALIMENTATORE--------------------------------------
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("CoolerMaster","MWE GOLD 850 V2 ATX 3.0 READY","Cooler Master presents the MWE Gold V2 ATX 3.0 Ready featuring high power, ultra-silent performance with exceptional efficiency and reliability.",120,LocalDate.of(2022,9,1),0,20,850,true,2500));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("CoolerMaster","MWE GOLD 750 V2 ATX 3.0 READY","Cooler Master presents the MWE Gold V2 ATX 3.0 Ready featuring high power, ultra-silent performance with exceptional efficiency and reliability.",100,LocalDate.of(2022,9,1),0,20,750,true,2300));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("CoolerMaster","GX III GOLD 1250","Cooler Master presents the GX III Gold featuring exceptional efficiency, low noise output, and superb reliability.",230,LocalDate.of(2022,9,1),0,20,1250,true,2800));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("CoolerMaster","GX III GOLD 1050","Cooler Master presents the GX III Gold featuring exceptional efficiency, low noise output, and superb reliability.",200,LocalDate.of(2022,9,1),0,20,1050,true,2800));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","RM1000x Shift with Premium Sleeved Type-5 Pro Cables Kit - White","CORSAIR RMx SHIFT Series fully modular power supplies boast a revolutionary patent-pending side cable interface to keep all your connections within easy reach, for exceptionally convenient 80 PLUS Gold efficient power.",206.9,LocalDate.of(2023,9,1),0,20,1000,true,2800));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","HX1500i Fully Modular Ultra-Low Noise Platinum ATX 1500 Watt PC Power Supply (EU)","Grazie ai tre connettori EPS12V e al cablaggio totalmente modulare, gli alimentatori HXi Series platinum assicurano ogni tipo di connessione necessaria per gestire al meglio l’erogazione di corrente dei PC all’avanguardia.",259.9,LocalDate.of(2023,9,1),0,20,1500,true,3100));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","Alimentatore ATX RM Series interamente modulare RM650 da 650 Watt con certificazione 80 PLUS Gold (EU)","Gli alimentatori CORSAIR RM Series interamente modulari e a bassa rumorosità assicurano a un'ampia varietà di sistemi PC un’alimentazione affidabile e silenziosa con efficienza 80 PLUS Gold.",84.9,LocalDate.of(2022,10,1),0,20,650,true,2200));
+
+        itemService.saveAlimentatore(new AlimentatorePayLoad("Corsair","SF-L Series SF850L Fully Modular Low-Noise SFX Power Supply (EU)","CORSAIR SF-L Series Fully Modular SFX Power Supplies with ATX 3.0 and PCIe 5.0 compliance provide the continuous high wattages demanded by the latest PC hardware, all in a space-saving SFX-L form-factor.",169.9,LocalDate.of(2022,10,1),0,20,850,true,2400));*/
+
     }
 }

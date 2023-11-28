@@ -122,4 +122,7 @@ public class UserService {
         return u.getItems();
     }
 
+    public User getMyself(long id) {
+        return getSingleUser(id);
+    }
 }

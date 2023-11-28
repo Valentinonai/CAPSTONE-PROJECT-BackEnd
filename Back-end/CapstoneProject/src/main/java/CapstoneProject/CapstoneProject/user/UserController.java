@@ -32,6 +32,11 @@ public class UserController {
     public User getSingleUser(@PathVariable long id){
         return userService.getSingleUser(id);
     }
+    @GetMapping("/me")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public User getSingleUser(@AuthenticationPrincipal User u){
+        return userService.getMyself(u.getId());
+    }
     @PutMapping("/me")
     public User modificaPasswordUser(@AuthenticationPrincipal User u, @RequestBody @Validated ModificaPasswordPayLoad body, BindingResult validation){
         if(validation.hasErrors()){

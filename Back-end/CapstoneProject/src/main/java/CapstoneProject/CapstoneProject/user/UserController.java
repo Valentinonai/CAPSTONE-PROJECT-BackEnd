@@ -64,7 +64,7 @@ public class UserController {
     @DeleteMapping("/elimina/me")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void canccellaBuild(@AuthenticationPrincipal User u){
+    public void canccellaUtente(@AuthenticationPrincipal User u){
         userService.deleteUser(u.getId());
     }
 

@@ -7,6 +7,7 @@ import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
 import CapstoneProject.CapstoneProject.cpu.Cpu;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
+import CapstoneProject.CapstoneProject.hard_disk.HardDisk;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
@@ -193,6 +194,12 @@ public class ItemController {
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Item> getAllByCategoria(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String categoria){
         if(categoria!=null)    return itemService.getByCategoria(page,size>20?10:size,order,categoria);
+        else throw new BadRequest("Parametro categoria non valido");
+    }
+    @GetMapping("/hard_disk")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<HardDisk> getAllHardDisk(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order, @RequestParam Boolean m2){
+        if(m2!=null)    return itemService.getByHardDisk(page,size>20?10:size,order,m2);
         else throw new BadRequest("Parametro categoria non valido");
     }
 

@@ -16,6 +16,7 @@ import CapstoneProject.CapstoneProject.exception.BadRequest;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
 import CapstoneProject.CapstoneProject.exception.ProdottoEsauritoException;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisk;
+import CapstoneProject.CapstoneProject.hard_disk.HardDiskRepository;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.ram.Ram;
 import CapstoneProject.CapstoneProject.ram.RamPayLoad;
@@ -59,6 +60,8 @@ public class ItemService {
     private AlimentatoreRepository alimentatoreRepository;
     @Autowired
     private VentoleRepository ventoleRepository;
+    @Autowired
+    private HardDiskRepository hardDiskRepository;
 
     @Autowired
     private CloudinaryService cloudinaryService;
@@ -220,5 +223,10 @@ public class ItemService {
     public Page<Ventola> findByVentolaDimensione(int page,int size,String order,int dimensione){
         Pageable p=PageRequest.of(page,size,Sort.by(order));
         return ventoleRepository.findByDimensioneAndStato(p,dimensione,Stato.ATTIVO);
+    }
+
+    public Page<HardDisk> getByHardDisk(int page, int size, String order, Boolean m2) {
+        Pageable p=PageRequest.of(page,size,Sort.by(order));
+        return hardDiskRepository.findByM2(p,m2);
     }
 }

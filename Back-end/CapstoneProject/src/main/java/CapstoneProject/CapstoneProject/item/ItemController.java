@@ -7,6 +7,7 @@ import CapstoneProject.CapstoneProject.boxCase.BoxCasePayLoad;
 import CapstoneProject.CapstoneProject.cpu.Cpu;
 import CapstoneProject.CapstoneProject.cpu.CpuPayLoad;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
+import CapstoneProject.CapstoneProject.exception.SingleBadRequest;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisk;
 import CapstoneProject.CapstoneProject.hard_disk.HardDisskPayLoad;
 import CapstoneProject.CapstoneProject.ram.Ram;
@@ -167,46 +168,46 @@ public class ItemController {
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Cpu> getCpuBySocket(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String socket){
         if(socket!=null)    return itemService.getCpuBySocket(page,size>20?10:size,order,socket);
-        else throw new BadRequest("Parametro socket non valido");
+        else throw new SingleBadRequest("Parametro socket non valido");
     }
 
     @GetMapping("/ram_schedamadre")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Ram> getRamBySchedaMadre(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String scheda_madre_id){
         if(scheda_madre_id!=null)    return itemService.getRamBySchedaMadre(page,size>20?10:size,order,Long.parseLong(scheda_madre_id));
-        else throw new BadRequest("Parametro scheda madre id non valido");
+        else throw new SingleBadRequest("Parametro scheda madre id non valido");
     }
 
     @GetMapping("/case")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<BoxCase> getBoxCaseByFormato(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order, @RequestParam String formato){
         if(formato!=null)    return itemService.getBoxCaseByFormato(page,size>20?10:size,order,formato);
-        else throw new BadRequest("Parametro formato non valido");
+        else throw new SingleBadRequest("Parametro formato non valido");
     }
     @GetMapping("/alimentatore")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Alimentatore> getAlimentatoreByPotenza(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order, @RequestParam String power){
-        if(power!=null)    return itemService.getAlimentatoreByPotenza(page,size>20?10:size,order,Integer.parseInt(power));
-        else throw new BadRequest("Parametro power non valido");
+        if(power!="")    return itemService.getAlimentatoreByPotenza(page,size>20?10:size,order,Integer.parseInt(power));
+        else throw new SingleBadRequest("Parametro power non valido");
     }
 
     @GetMapping("/categoria")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Item> getAllByCategoria(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String categoria){
         if(categoria!=null)    return itemService.getByCategoria(page,size>20?10:size,order,categoria);
-        else throw new BadRequest("Parametro categoria non valido");
+        else throw new SingleBadRequest("Parametro categoria non valido");
     }
     @GetMapping("/hard_disk")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<HardDisk> getAllHardDisk(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order, @RequestParam Boolean m2){
         if(m2!=null)    return itemService.getByHardDisk(page,size>20?10:size,order,m2);
-        else throw new BadRequest("Parametro categoria non valido");
+        else throw new SingleBadRequest("Parametro categoria non valido");
     }
 
     @GetMapping("/ventole")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Ventola> getVentoleByDimensione(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "id") String order,@RequestParam(defaultValue = "120") String dimensione){
         if(dimensione!=null)    return itemService.findByVentolaDimensione(page,size>20?10:size,order,Integer.parseInt(dimensione));
-        else    throw new BadRequest("Il valore dimensione non è corretto");
+        else    throw new SingleBadRequest("Il valore dimensione non è corretto");
     }
 }

@@ -29,15 +29,20 @@ public class FilterChainConfig {
     private FilterExceptions filterExceptions;
     @Bean
     SecurityFilterChain securityFilterChainConfig(HttpSecurity http) throws Exception {
-        http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-        http.formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable());
+        try {
+            http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+            http.formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer.disable());
 
-        http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(filterExceptions,CustomFilter.class);
-        http.authorizeHttpRequests(request->request.requestMatchers("/**").permitAll());
-        http.cors(withDefaults());
-        return http.build();
+            http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
+            http.addFilterBefore(filterExceptions, CustomFilter.class);
+            http.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
+            http.cors(withDefaults());
+            return http.build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource(){

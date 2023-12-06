@@ -2,6 +2,7 @@ package CapstoneProject.CapstoneProject.build;
 
 import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.exception.Unauthorized;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.item.ItemService;
 import CapstoneProject.CapstoneProject.user.User;
@@ -70,5 +71,15 @@ public class BuildService {
             buildRepository.save(b);
 
         }
+    }
+
+    public void deleteMyBuild(long id,long user_id) {
+        Build build = getSingleBuild(id);
+        if(build.getUser().getId()==user_id)
+        {
+            build.setStato(Stato.INATTIVO);
+            buildRepository.save(build);
+        }else throw new Unauthorized("Non sei autorizzato ad eliminare questa build");
+
     }
 }

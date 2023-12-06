@@ -61,11 +61,16 @@ public class BuildController {
     }
     @DeleteMapping("/cancella_build/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void canccellaBuild(@PathVariable long id){
         buildService.deleteBuild(id);
     }
-
+    @DeleteMapping("/cancella_build/{id}/me")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public void canccellaMyBuild(@PathVariable long id,@AuthenticationPrincipal User u){
+        buildService.deleteMyBuild(id,u.getId());
+    }
 
 }
 

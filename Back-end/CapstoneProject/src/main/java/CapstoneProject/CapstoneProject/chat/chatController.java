@@ -20,7 +20,7 @@ public class chatController {
 
     @PostMapping()
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public String richiestaChat(@RequestBody @Validated ChatPayload message, BindingResult validation) throws IOException {
+    public ChatPayload richiestaChat(@RequestBody @Validated ChatPayload message, BindingResult validation) throws IOException {
         if(validation.hasErrors())
         {
             throw new BadRequest(validation.getAllErrors());

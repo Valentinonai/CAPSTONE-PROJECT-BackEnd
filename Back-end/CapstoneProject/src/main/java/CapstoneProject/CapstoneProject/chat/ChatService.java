@@ -1,5 +1,7 @@
 package CapstoneProject.CapstoneProject.chat;
 
+import CapstoneProject.CapstoneProject.exception.SingleBadRequest;
+import org.cloudinary.json.JSONArray;
 import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +17,7 @@ import java.net.URL;
 public class ChatService {
     @Value("${openai.api.key}")
     private String key;
-    public String domanda(ChatPayload message) throws IOException {
+    public ChatPayload domanda(ChatPayload message) throws IOException {
         String url = "https://api.openai.com/v1/completions";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
@@ -35,6 +37,24 @@ public class ChatService {
         String output = new BufferedReader(new InputStreamReader(con.getInputStream())).lines()
                 .reduce((a, b) -> a + b).get();
 
-        return new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
+        JSONObject jsonObject = new JSONObject(output);
+
+
+        JSONArray choicesArray = jsonObject.getJSONArray("choices");
+
+
+        JSONObject firstChoice = choicesArray.getJSONObject(0);
+
+
+        String str = firstChoice.getString("text");
+        
+        int secondaRigaIndex = str.indexOf("\n", str.indexOf("\n") + 1);
+
+        if (secondaRigaIndex != -1) {
+        return new ChatPayload(str.substring(secondaRigaIndex + 1));
+
+    }else throw new SingleBadRequest("Errore");
+
+
     }
 }

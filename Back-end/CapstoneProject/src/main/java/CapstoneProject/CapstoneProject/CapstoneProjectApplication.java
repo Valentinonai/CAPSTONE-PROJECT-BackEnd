@@ -10,14 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CapstoneProjectApplication {
 
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(CapstoneProjectApplication.class, args);
-
-
-	}
-
-
-
-
-	}
+	public static void main(String[] args) throws Exception {SpringApplication.run(CapstoneProjectApplication.class, args);}
+}
 

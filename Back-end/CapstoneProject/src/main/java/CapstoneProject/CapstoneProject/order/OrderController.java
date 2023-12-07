@@ -1,9 +1,8 @@
 package CapstoneProject.CapstoneProject.order;
 
-import CapstoneProject.CapstoneProject.build.Build;
-import CapstoneProject.CapstoneProject.build.BuildSavePayload;
-import CapstoneProject.CapstoneProject.build.BuildService;
+import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.exception.BadRequest;
+import CapstoneProject.CapstoneProject.exception.SingleBadRequest;
 import CapstoneProject.CapstoneProject.user.User;
 import CapstoneProject.CapstoneProject.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class OrderController {
     @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public Ordine creaOrdine(@RequestBody @Validated OrdinePayLaod body, BindingResult validation, @AuthenticationPrincipal User u){
+    public ElementiNonPresentiPayload creaOrdine(@RequestBody @Validated OrdinePayLaod body, BindingResult validation, @AuthenticationPrincipal User u){
         User user=userService.getSingleUser(u.getId());
         if(validation.hasErrors())
         {
@@ -61,5 +60,15 @@ public class OrderController {
     public void cancellaOrdine(@PathVariable long id){
         ordineService.eliminaOrdine(id);
     }
+
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Ordine modificaStato(@PathVariable long id,@RequestParam String stato){
+        if(stato!=""||stato.toUpperCase()=="ATTIVO"||stato.toUpperCase()=="INATTIVO"||stato.toUpperCase()=="SPEDITO"||stato.toUpperCase()=="CONSEGNATO")   return ordineService.modificaStatoOrdine( Stato.valueOf(stato.toUpperCase()),id);
+        else throw new SingleBadRequest("Stato selezionato non valido");
+    }
+
+
 
 }

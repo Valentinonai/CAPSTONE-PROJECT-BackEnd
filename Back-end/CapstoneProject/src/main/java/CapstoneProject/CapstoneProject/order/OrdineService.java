@@ -44,7 +44,7 @@ public class OrdineService {
         return ordineRepository.findById(id).orElseThrow(()->new NotFoundException("Elemento non trovato"));
     }
 
-    public Ordine saveOrdine(OrdinePayLaod body,long user_id){
+    public ElementiNonPresentiPayload saveOrdine(OrdinePayLaod body,long user_id){
         List<Build> buildList=new ArrayList<>();
         List<Item> itemList=new ArrayList<>();
         for(int i=0;i<body.builds_id().size();i++)    buildList.add(buildService.getSingleBuild(body.builds_id().get(i)));
@@ -89,8 +89,10 @@ public class OrdineService {
             itemList.remove(itemsDaRimuovere.get(i));
         }
         Ordine o=new Ordine(u.getIndirizzoSpedizione(),u,buildList,itemList);
+        o.setStato(Stato.IN_LAVORAZIONE);
+        if(!buildList.isEmpty() || !itemList.isEmpty())
         ordineRepository.save(o);
-        return o;
+        return new ElementiNonPresentiPayload(elementiDaRimuovere,itemsDaRimuovere);
     }
 
 public void eliminaOrdine(long id){
@@ -102,5 +104,13 @@ ordineRepository.save(o);
     public Page<Ordine> getUserOrdini(int page,int size,String order,User u) {
         Pageable p=PageRequest.of(page,size,Sort.by(order));
         return ordineRepository.findByUser(p,u.getId());
+    }
+
+
+
+    public Ordine modificaStatoOrdine(Stato stato,long ordine_id ){
+Ordine o=getSingleOrdine(ordine_id);
+o.setStato(stato);
+return ordineRepository.save(o);
     }
 }

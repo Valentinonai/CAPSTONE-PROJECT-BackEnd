@@ -4,6 +4,7 @@ import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.build.BuildService;
 import CapstoneProject.CapstoneProject.exception.NotFoundException;
+import CapstoneProject.CapstoneProject.exception.SingleBadRequest;
 import CapstoneProject.CapstoneProject.item.Item;
 import CapstoneProject.CapstoneProject.item.ItemPayLoadQuantita;
 import CapstoneProject.CapstoneProject.item.ItemService;
@@ -112,5 +113,11 @@ ordineRepository.save(o);
 Ordine o=getSingleOrdine(ordine_id);
 o.setStato(stato);
 return ordineRepository.save(o);
+    }
+
+    public Ordine getSingleOrdineUser(long user_id, long id) {
+        Ordine o=getSingleOrdine(id);
+        if(o.getUser_id().getId()==user_id)    return o;
+        else throw new SingleBadRequest("Non hai nessun ordine numero: "+id);
     }
 }

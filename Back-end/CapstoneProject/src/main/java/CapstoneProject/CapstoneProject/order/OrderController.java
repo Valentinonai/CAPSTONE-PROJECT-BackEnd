@@ -74,6 +74,10 @@ public class OrderController {
         else throw new SingleBadRequest("Stato selezionato non valido");
     }
 
-
+@GetMapping("/totale/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public int contaItemsVenduti(@PathVariable int id){
+        return ordineService.contaElementiVenduti(id);
+}
 
 }

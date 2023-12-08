@@ -120,4 +120,13 @@ return ordineRepository.save(o);
         if(o.getUser_id().getId()==user_id)    return o;
         else throw new SingleBadRequest("Non hai nessun ordine numero: "+id);
     }
+
+    public int contaElementiVenduti(long id){
+        int sum=0;
+       sum= ordineRepository.contaItemsVenduti(id);
+        System.err.println(sum);
+       sum=sum + ordineRepository.contaItemsBuildsVenduti(id);
+        System.err.println(sum);
+       return sum;
+    }
 }

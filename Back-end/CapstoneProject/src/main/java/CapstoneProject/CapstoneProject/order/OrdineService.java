@@ -1,5 +1,6 @@
 package CapstoneProject.CapstoneProject.order;
 
+import CapstoneProject.CapstoneProject.Enum.Ruolo;
 import CapstoneProject.CapstoneProject.Enum.Stato;
 import CapstoneProject.CapstoneProject.build.Build;
 import CapstoneProject.CapstoneProject.build.BuildService;
@@ -117,8 +118,14 @@ return ordineRepository.save(o);
 
     public Ordine getSingleOrdineUser(long user_id, long id) {
         Ordine o=getSingleOrdine(id);
-        if(o.getUser_id().getId()==user_id)    return o;
-        else throw new SingleBadRequest("Non hai nessun ordine numero: "+id);
+        User u=userService.getSingleUser(user_id);
+        if(u.getRuolo()== Ruolo.ADMIN){
+            return o;
+        }else if(u.getRuolo()==Ruolo.USER){
+            if(o.getUser_id().getId()==user_id)    return o;
+            else throw new SingleBadRequest("Non hai nessun ordine numero: "+id);
+        }
+        throw new SingleBadRequest("Non hai nessun ordine numero: "+id);
     }
 
     public int contaElementiVenduti(long id){

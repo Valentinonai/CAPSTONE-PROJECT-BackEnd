@@ -37,7 +37,7 @@ public class OrderController {
     }
 
     @GetMapping("/me/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Ordine getSingleOrdineUser(@AuthenticationPrincipal User u,@PathVariable long id){
         return ordineService.getSingleOrdineUser(u.getId(),id);
     }

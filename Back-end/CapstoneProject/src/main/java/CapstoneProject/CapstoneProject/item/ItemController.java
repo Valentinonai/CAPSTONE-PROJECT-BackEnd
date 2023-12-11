@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/items")
@@ -36,8 +37,8 @@ public class ItemController {
     //------------------------EndPoint per Items-------------------------------
     @GetMapping()
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Page<Item> getAllItems(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String order){
-        return itemService.getAllItems(page,size>20?10:size,order);
+    public List<Item> getAllItems(){
+        return itemService.getAllItems();
     }
 
     @GetMapping("/{id}")

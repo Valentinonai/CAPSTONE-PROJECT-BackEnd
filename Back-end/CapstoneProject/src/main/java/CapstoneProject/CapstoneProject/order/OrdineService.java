@@ -124,9 +124,7 @@ return ordineRepository.save(o);
     public int contaElementiVenduti(long id){
         int sum=0;
        sum= ordineRepository.contaItemsVenduti(id);
-        System.err.println(sum);
        sum=sum + ordineRepository.contaItemsBuildsVenduti(id);
-        System.err.println(sum);
        return sum;
     }
 }

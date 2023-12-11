@@ -70,9 +70,8 @@ public class ItemService {
 
     //-----------------------GET------------------------------
 
-    public Page<Item> getAllItems(int page,int size,String order){
-        Pageable p= PageRequest.of(page,size, Sort.by(order));
-        return itemRepository.findAll(p);
+    public List<Item> getAllItems(){
+        return itemRepository.findAll();
     }
     public Item getSingleItem(long id){
         return itemRepository.findById(id).orElseThrow(()->new NotFoundException("Elemento non trovato"));

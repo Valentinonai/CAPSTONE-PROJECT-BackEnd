@@ -18,4 +18,7 @@ public interface OrdineRepository extends JpaRepository<Ordine, Long> {
     Integer contaItemsVenduti(long id);
     @Query("select count(o) from Ordine o JOIN o.builds b JOIN b.items i where i.id=:id")
     Integer contaItemsBuildsVenduti(long id);
+
+    @Query("select o from Ordine o order by o.data_creazione DESC")
+    Page<Ordine> findAllOrders(Pageable p);
 }

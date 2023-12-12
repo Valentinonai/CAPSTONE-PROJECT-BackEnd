@@ -39,7 +39,7 @@ public class OrdineService {
 
     public Page<Ordine> getAllOrdine(int page,int size,String order){
         Pageable p= PageRequest.of(page,size, Sort.by(order));
-        return ordineRepository.findAll(p);
+        return ordineRepository.findAllOrders(p);
     }
 
     public Ordine getSingleOrdine(long id){

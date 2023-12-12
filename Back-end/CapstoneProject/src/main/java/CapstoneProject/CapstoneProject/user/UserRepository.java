@@ -14,6 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    @Query(value = "select item_id, count(*)  from item_user group by item_id",nativeQuery = true)
+    @Query(value = "select item_id, count(*)  from item_user group by item_id order by count(*) desc",nativeQuery = true)
     List<List<Object>> likesItems();
 }

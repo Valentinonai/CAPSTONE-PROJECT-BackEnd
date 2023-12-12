@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -124,5 +124,19 @@ public class UserService {
 
     public User getMyself(long id) {
         return getSingleUser(id);
+    }
+
+
+
+    public LikesDTO likesItems(){
+       List<List<Object>> o=userRepository.likesItems();
+List<Long> item_id = new ArrayList<>();
+        List<Long> count=new ArrayList<>();
+        for(int i=0;i<o.size();i++){
+            item_id.add((Long) o.get(i).get(0));
+            count.add((Long) o.get(i).get(1));
+        }
+        LikesDTO l=new LikesDTO(item_id,count);
+        return l;
     }
 }

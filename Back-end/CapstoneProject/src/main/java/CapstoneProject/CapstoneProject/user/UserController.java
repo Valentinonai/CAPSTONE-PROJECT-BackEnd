@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -78,5 +79,12 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Set<Item> rimuoviPreferiti(@AuthenticationPrincipal User u,@RequestParam long item_id){
         return userService.rimuoviPreferiti(item_id,u.getId());
+    }
+
+
+    @GetMapping("/likes")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public LikesDTO getSingleUser(){
+        return userService.likesItems();
     }
 }

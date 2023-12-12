@@ -33,9 +33,5 @@ public class chatController {
 
         return chatService.apriThread();
     }
-    @PostMapping("/chiudi_thread/{thread}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public void  apriChat(@PathVariable String thread) throws IOException {
-        chatService.chiudiThread(thread);
-    }
+
 }

@@ -29,7 +29,7 @@ public record CpuPayLoad(
 
         //Specifiche
 
-        @NotEmpty(message = "Il campo dsocket non può essere vuoto")
+        @NotEmpty(message = "Il campo socket non può essere vuoto")
       String socket,
                 @NotNull(message = "Il campo numero di core non può essere vuoto")
                 @Min(0)

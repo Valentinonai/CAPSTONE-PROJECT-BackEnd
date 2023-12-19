@@ -22,6 +22,9 @@ import java.net.URL;
 
 import java.net.http.HttpClient;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.CountDownLatch;
 
 @Service
 public class ChatService {
@@ -30,6 +33,10 @@ public class ChatService {
 
     @Value("${openai.assistant.id}")
     private String assistant_id;
+
+    private static final int TIMER_DELAY = 1000;
+    private static final int TIMEOUT_SECONDS = 30;
+   private static boolean x=false;
 
     public ChatPayload domanda(ChatPayload message,String thread) throws IOException {
        try {
@@ -50,9 +57,11 @@ public class ChatService {
             String responseString = EntityUtils.toString(response.getEntity());
             JSONObject jsonObject = new JSONObject(responseString);
             httpClient.close();
-            eseguiAssistente(thread);
-            // Stampa della risposta
+            ChatPayload c=eseguiAssistente(thread);
+
+           if(c==null)
             return rispostaAssistente(thread);
+           else return new ChatPayload("Errore nel caricamento");
         }catch (Exception e) {
            e.printStackTrace();
            throw new SingleBadRequest("MESSAGGIO NON INVIATO");
@@ -61,38 +70,38 @@ public class ChatService {
 
     public ThreadPayload apriThread() {
         try {
-            // Sostituisci con la tua chiave API
+
             String openaiApiKey = key;
 
-            // Costruisci l'URL dell'API OpenAI
+
             String apiUrl = "https://api.openai.com/v1/threads";
 
-            // Crea un client HttpClient
+
             CloseableHttpClient httpClient = HttpClients.createDefault();
 
-            // Crea una richiesta HTTP di tipo GET
+
             HttpPost httpPost = new HttpPost(apiUrl);
 
-            // Aggiungi le intestazioni necessarie, inclusa l'autorizzazione
+
             httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Authorization", "Bearer "+key);
             httpPost.setHeader("OpenAI-Beta", "assistants=v1");
             httpPost.setHeader("Assistant_id", assistant_id);
 
-            // Esegui la richiesta e ottieni la risposta
+
             HttpResponse response = ((CloseableHttpClient) httpClient).execute(httpPost);
 
-            // Leggi e stampa la risposta
+
             String responseBodyString = EntityUtils.toString(response.getEntity());
             JSONObject responseBody = new JSONObject(responseBodyString);
             httpClient.close();
             return new ThreadPayload(responseBody.getString("id"));
-            // Chiudi le risorse
+
 
         } catch (IOException e) {
             e.printStackTrace();
             throw new SingleBadRequest("STATO NON DISPONIBILE");
-            // Gestisci l'eccezione in base alle tue esigenze
+
         }
     }
 
@@ -114,10 +123,36 @@ public class ChatService {
             JSONObject jsonObject=new JSONObject(response);
             httpClient.close();
             String idRun= (String) jsonObject.get("id");
-            boolean x=false;
-                while(!x){
-                    x=getStato(thread,idRun);
-                };
+
+
+            CountDownLatch latch = new CountDownLatch(1);
+            Timer timer = new Timer();
+
+            timer.schedule(new TimerTask() {
+                int elapsedSeconds = 0;
+
+                @Override
+                public void run() {
+                    try {
+                        x = getStato(thread,idRun);
+                        if (x || elapsedSeconds >= TIMEOUT_SECONDS) {
+                            latch.countDown();
+                            timer.cancel(); 
+                        }else {
+                            elapsedSeconds++;
+
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+                }
+            }, 0, TIMER_DELAY);
+            latch.await();
+            if(x) return null;
+            else return new ChatPayload("Errore caricamento");
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,36 +189,36 @@ public class ChatService {
     public boolean getStato(String thread,String id_run) throws IOException {
 
         try {
-            // Sostituisci con la tua chiave API
+
             String openaiApiKey = key;
 
-            // Sostituisci con l'ID del thread e dell'esecuzione specifici
+
             String threadId = thread;
             String runId = id_run;
 
-            // Costruisci l'URL dell'API OpenAI
+
             String apiUrl = "https://api.openai.com/v1/threads/" + threadId + "/runs/" + runId;
 
-            // Crea un client HttpClient
+
             CloseableHttpClient httpClient = HttpClients.createDefault();
 
-            // Crea una richiesta HTTP di tipo GET
+
             HttpGet httpGet = new HttpGet(apiUrl);
 
-            // Aggiungi le intestazioni necessarie, inclusa l'autorizzazione
+
             httpGet.setHeader("Authorization", "Bearer " + openaiApiKey);
             httpGet.setHeader("OpenAI-Beta", "assistants=v1");
 
-            // Esegui la richiesta e ottieni la risposta
+
             HttpResponse response = ((CloseableHttpClient) httpClient).execute(httpGet);
 
-            // Leggi e stampa la risposta
+
             String responseBodyString = EntityUtils.toString(response.getEntity());
             JSONObject responseBody = new JSONObject(responseBodyString);
             httpClient.close();
             if(Objects.equals(responseBody.getString("status"), "completed"))   return true;
             else return false;
-            // Chiudi le risorse
+
 
         } catch (IOException e) {
             e.printStackTrace();

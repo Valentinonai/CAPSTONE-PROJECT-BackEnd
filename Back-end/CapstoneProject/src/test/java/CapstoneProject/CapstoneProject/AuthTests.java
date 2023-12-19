@@ -1,15 +1,13 @@
 package CapstoneProject.CapstoneProject;
-import CapstoneProject.CapstoneProject.build.BuildController;
+
 import CapstoneProject.CapstoneProject.security.LogInDTO;
 import CapstoneProject.CapstoneProject.security.SecurityController;
-import CapstoneProject.CapstoneProject.security.SecurityService;
-import CapstoneProject.CapstoneProject.user.UserController;
+
 import CapstoneProject.CapstoneProject.user.UserPayLoad;
 import CapstoneProject.CapstoneProject.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest(controllers = SecurityController.class)

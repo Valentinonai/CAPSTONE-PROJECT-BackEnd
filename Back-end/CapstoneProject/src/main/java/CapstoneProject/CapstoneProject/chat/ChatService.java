@@ -137,7 +137,7 @@ public class ChatService {
                         x = getStato(thread,idRun);
                         if (x || elapsedSeconds >= TIMEOUT_SECONDS) {
                             latch.countDown();
-                            timer.cancel(); 
+                            timer.cancel();
                         }else {
                             elapsedSeconds++;
 

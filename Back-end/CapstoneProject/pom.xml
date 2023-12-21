@@ -8,11 +8,11 @@
 		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>Esercizio-13-11-2023</groupId>
-	<artifactId>Esercizio-13-11-2023</artifactId>
+	<groupId>CAPSTONE_PROJECT</groupId>
+	<artifactId>CAPSTONE_PROJECT</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Esercizio-13-11-2023</name>
-	<description>Esercizio-13-11-2023</description>
+	<name>CAPSTONE_PROJECT</name>
+	<description>CAPSTONE_PROJECT</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

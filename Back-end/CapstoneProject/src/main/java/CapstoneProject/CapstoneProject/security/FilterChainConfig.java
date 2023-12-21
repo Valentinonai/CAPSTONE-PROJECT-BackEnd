@@ -3,6 +3,7 @@ package CapstoneProject.CapstoneProject.security;
 import CapstoneProject.CapstoneProject.security.CustomFilter;
 import CapstoneProject.CapstoneProject.security.FilterExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -27,6 +28,9 @@ public class FilterChainConfig {
     private CustomFilter customFilter;
     @Autowired
     private FilterExceptions filterExceptions;
+
+    @Value("${cors.origin}")
+    private String cors_origin;
     @Bean
     SecurityFilterChain securityFilterChainConfig(HttpSecurity http) throws Exception {
         try {
@@ -47,7 +51,7 @@ public class FilterChainConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of(cors_origin));
         config.setAllowedMethods(List.of("*"));
         config.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

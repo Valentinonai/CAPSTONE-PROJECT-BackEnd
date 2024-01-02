@@ -43,7 +43,22 @@ public class CustomFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/auth/**",request.getServletPath());
+        String servletPath = request.getServletPath();
+        boolean isAuthPath = new AntPathMatcher().match("/auth/**", servletPath);
+        boolean isAnotherPath = new AntPathMatcher().match("/api/v1/auth/**", servletPath);
+        boolean isAnotherPath1 = new AntPathMatcher().match("/v2/api-docs", servletPath);
+        boolean isAnotherPath2 = new AntPathMatcher().match("/v3/api-docs", servletPath);
+        boolean isAnotherPath3 = new AntPathMatcher().match("/V3/api-docs/**", servletPath);
+        boolean isAnotherPath4 = new AntPathMatcher().match("/swagger-resources", servletPath);
+        boolean isAnotherPath5 = new AntPathMatcher().match( "/swagger-resources/**", servletPath);
+        boolean isAnotherPath6 = new AntPathMatcher().match(  "/configuration/ui", servletPath);
+        boolean isAnotherPath7 = new AntPathMatcher().match(  "/configuration/security", servletPath);
+        boolean isAnotherPath8 = new AntPathMatcher().match(   "/swagger-ui/**", servletPath);
+        boolean isAnotherPath9 = new AntPathMatcher().match(  "/webjars/**", servletPath);
+        boolean isAnotherPath10 = new AntPathMatcher().match(  "/swagger-ui.html", servletPath);
+        boolean isAnotherPath11 = new AntPathMatcher().match(  "/v3/api-docs/swagger-config", servletPath);
+
+        return isAuthPath || isAnotherPath|| isAnotherPath1|| isAnotherPath2|| isAnotherPath3|| isAnotherPath4|| isAnotherPath5|| isAnotherPath6|| isAnotherPath7|| isAnotherPath8|| isAnotherPath9|| isAnotherPath10||isAnotherPath11;
     }
 
 
